@@ -1,0 +1,11 @@
+{
+    "world": {
+        "name": "Bella_Dev",
+        "type": "hub",
+        "imgPath": "./profile.jpg",
+        "description_short": "Bella's Development World.",
+        "description_long": "Bella's World for Development",
+        "tags": [ "Dev", "Dev", "Dev"],
+        "supportedDevices": [ "mobile", "desktop", "hmd_3dof", "hmd_6dof" ]
+    }
+}
