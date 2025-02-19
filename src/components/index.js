@@ -22,6 +22,7 @@ require('./circles-parent-constraint');
 require('./circles-pdf-loader');
 require('./circles-pickup-networked');
 require('./circles-pickup-object');
+require('./solaris-pickup-object.js');
 require('./circles-platform-mirror');
 require('./circles-platform-scene-shadows');
 require('./circles-platform-shadows');
@@ -36,4 +37,4 @@ require('./circles-spawnpoint');
 require('./circles-sphere-env-map.js');
 require('./circles-user-networked');
 require('./circles-enter-ui');
-require('./solaris-pickup-object.js');
+

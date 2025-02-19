@@ -154,7 +154,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
     CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT_PRE, null, true);
   },
   clickFunc : function(e) {
-    const CONTEXT_AF = (e) ? e.srcElement.components['circles-pickup-object'] : this;
+    const CONTEXT_AF = (e) ? e.srcElement.components['solaris-pickup-object'] : this;
     if (CONTEXT_AF.pickedUp === true) {
       CONTEXT_AF.release(true, CONTEXT_AF);
     }
