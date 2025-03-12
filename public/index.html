@@ -2,15 +2,10 @@
 
 <head>
   <!-- the AFrame library and 3rd party components -->
-  <script src="https://cdn.jsdelivr.net/npm/aframe@1.7.0/dist/aframe-master.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/components/sphere-collider.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.controls.min.js"></script>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/c-frame/physx@v0.1.2/dist/physx.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.11/build/handy-controls.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.11/build/magnet-helpers.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
   <script src="simple-navmesh-constraint.js"></script>
   
   <!-- Our custom behaviour -->
@@ -32,6 +27,7 @@
       <a-asset-item id="stew-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/model.gltf?v=1690887932932"></a-asset-item>
       <a-asset-item id="table-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/small_wooden_table_01_1k-v1.glb?v=1647263187998"></a-asset-item>
       <a-asset-item id="clock-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/vintage_grandfather_clock_01_1k-v2.glb?v=1647265174189"></a-asset-item>
+      <a-asset-item id="animation-gltf" src="/assets/models/male_survivor.glb"></a-asset-item>
     </a-assets>
 
     <a-entity position="0 0 0" environment="lighting:none; shadow:true; preset: default;"></a-entity>
@@ -47,6 +43,7 @@
                 camera="near:0.01;"
                 look-controls="pointerLockEnabled: false"
                 position="0 1.6 0">
+                <a-entity cursor="rayOrigin: mouse" raycaster="objects: .interactive"></a-entity>
       </a-entity>
 
       <!-- collision box for body -->
@@ -107,6 +104,76 @@
       // a-planes do not work well with static bodies so opt for a-boxes instead
       
       -->
+
+      <a-entity scale="0.2 0.2 0.2" position="0 2 0" gltf-model="#animation-gltf" animation-mixer="loop:repeat; clip: NlaTrack"></a-entity>
+
+      <script>
+        document.querySelector('a-entity').components['animation-mixer'].data
+      </script>
+
+      <!-- control table -->
+      <a-entity position="0 1 7" geometry="primitive:box; width:4; depth:1; height:0.2;" rotation="45 0 0" material="color:rgb(0, 0, 0)" shadow></a-entity>
+
+      <!-- green button -->
+      <a-entity id="start_button" position="-1 0.7 6.9">
+        <a-entity class="button interactive" position="0 0.6 0" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(100, 255, 100)" rotation="45 0 0"
+                    animation__mouseenter="property:material.color; type:color; to:rgb(0, 255, 0); startEvents:mouseenter; dur:200"
+                    animation__mouseleave="property:material.color; type:color; to:rgb(100, 255, 100); startEvents:mouseleave; dur:200"
+                    animation__click="property:position.y; from:0.55; to:0.6; startEvents:click; dur:300" shadow></a-entity>
+      </a-entity>
+      
+      <!-- blue button -->
+      <a-entity id="next_button" position="-1.5 0.4 7.2">
+          <a-entity class="button interactive" position="0 0.6 0" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(100, 100, 255)" rotation="45 0 0"
+                      animation__mouseenter="property:material.color; type:color; to:rgb(0, 0, 255); startEvents:mouseenter; dur:200"
+                      animation__mouseleave="property:material.color; type:color; to:rgb(100, 100, 255); startEvents:mouseleave; dur:200"
+                      animation__click="property:position.y; from:0.55; to:0.6; startEvents:click; dur:300" shadow></a-entity>
+      </a-entity>
+
+      <!-- red button -->
+      <a-entity id="stop_button" position="-0.5 0.4 7.2" update-player>
+        <a-entity class="button interactive" position="0 0.6 0" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(255, 100, 100)" rotation="45 0 0"
+                    animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); startEvents:mouseenter; dur:200"
+                    animation__mouseleave="property:material.color; type:color; to:rgb(255, 100, 100); startEvents:mouseleave; dur:200"
+                    animation__click="property:position.y; from:0.55; to:0.6; startEvents:click; dur:300" shadow></a-entity>
+      </a-entity>
+
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          // Select buttons
+          const startButton = document.querySelector("#start_button .button");
+          const nextButton = document.querySelector("#next_button .button");
+          const stopButton = document.querySelector("#stop_button .button");
+      
+          // Select an animated entity (modify if needed)
+          const animatedEntity = document.querySelector('[animation-mixer]');
+      
+          // Start animation
+          startButton.addEventListener("click", () => {
+              console.log("Start button clicked");
+              if (animatedEntity) {
+                  animatedEntity.setAttribute("animation-mixer", "clip: NlaTrack; loop: repeat");
+              }
+          });
+      
+          // Change to the next animation or interaction
+          nextButton.addEventListener("click", () => {
+              console.log("Next button clicked");
+              if (animatedEntity) {
+                  animatedEntity.setAttribute("animation-mixer", "clip: NlaTrack.004"); // Replace with actual animation name
+              }
+          });
+      
+          // Stop animation
+          stopButton.addEventListener("click", () => {
+              console.log("Stop button clicked");
+              if (animatedEntity) {
+                  animatedEntity.removeAttribute("animation-mixer");
+              }
+          });
+        });
+      </script>
+    
 
       <!-- blue box -->
       <a-box position="0 2 -3"
