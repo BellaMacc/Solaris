@@ -6,6 +6,10 @@
   <!----Added libraries - Ryan-->
 
   <!----Added scripts - Ryan-->
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.min.js"></script>   
+  <script src="simple-navmesh-constraint.js"></script>
+ 
+
 </head>
 <body>
   <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
@@ -23,12 +27,15 @@
       <a-asset-item id="table-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/small_wooden_table_01_1k-v1.glb?v=1647263187998"></a-asset-item>
       <a-asset-item id="clock-gltf" src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/vintage_grandfather_clock_01_1k-v2.glb?v=1647265174189"></a-asset-item>
       <a-asset-item id="animation-gltf" src="/worlds/_Ryan_Dev/assets/models/male_survivor.glb"></a-asset-item>
+      <a-asset-item id="rockGroup-gltf" src="/worlds/_Ryan_Dev/assets/models/rockGroup/rockGroup.gltf"></a-asset-item>
+      <a-asset-item id="pebble-gltf" src="/worlds/_Ryan_Dev/assets/models/pebble/pebble.gltf"></a-asset-item>
     </a-assets>
 
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/> <!---------------------Put code below this--------------------->
     
-    <a-entity id="survivor" scale="0.2 0.2 0.2" position="0 2 0" gltf-model="#animation-gltf" animation-mixer="loop:repeat; clip: NlaTrack"></a-entity>
+    <a-entity id="rockGroup" scale="1 1 1" position="2 0 2" gltf-model="#rockGroup-gltf" static-body></a-entity>
+    <a-entity id="pebble" scale="0.2 0.2 0.2" position="0 2 -2" gltf-model="#pebble-gltf" dynamic-body></a-entity>
 
       <script>
         document.querySelector('#survivor').components['animation-mixer'].data
@@ -135,7 +142,8 @@
       <!-- nav mesh (ground) -->
       <a-box 
             class="navmesh"
-            physx-body="type: static" 
+            physx-body="type: static"
+            static-body 
             position="0 -0.5 0" 
             rotation="-90 0 0" 
             width="20" 
@@ -171,12 +179,6 @@
       <!-- inaccessible square -->
       <a-entity id="wall" shadow="receive:true;" position="5 0 -3" rotation="0 0 0" scale="1.5 1.5 1.5" physx-body-from-model="type: static;">
       <a-plane rotation="-90 0 0" width="1" height="1" class="navmesh-hole" visible="true"></a-plane>
-      </a-entity>
-
-      <a-entity 
-        gltf-model="#animation-gtlf"
-        animation-mixer
-        position="0 1 0">
       </a-entity>
 
   </a-scene>
