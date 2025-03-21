@@ -1,5 +1,123 @@
 'use strict';
 
+
+
+AFRAME.registerComponent('solaris-object-slot', {
+  schema: {
+    heldItemId:         {type: "string", default:""},
+    dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
+    dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to orient as after it is released
+    dropScale:          { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //what scale after it is released
+    enabled:            { type: "boolean", default:true },                      //whethere this works
+  },
+  init: function() {
+    const CONTEXT_AF          = this;
+    const data                = CONTEXT_AF.data;
+    //states
+    CONTEXT_AF.isHoldingItem  = false;
+    CONTEXT_AF.rotationFudge  = 0.1;   //seems to be required to have some rotation on inspect so that it animates properly back to orig/dropRotation
+    //player related
+    CONTEXT_AF.playerHolder   = null;
+    CONTEXT_AF.origParent     = null;
+    //item related
+    CONTEXT_AF.itemID    = "NULL";
+    
+   
+    
+    
+    if (CIRCLES.isReady()) {
+      CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
+      CONTEXT_AF.origParent = CONTEXT_AF.el.parentNode;
+      
+      if (data.heldItemId != ""){
+         //if heldItem ID is not empty set the Context Variable to match and make know item held 
+        CONTEXT_AF.itemID = data.heldItemId;
+        CONTEXT_AF.isHoldingItem  = true;
+      }
+      console.log("Object Slot Ready");
+    }
+    else {
+      const readyFunc = function() {
+        CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
+        CONTEXT_AF.origParent   = CONTEXT_AF.el.parentNode;
+        
+        if (data.heldItemId != ""){
+           //if heldItem ID is not empty set the Context Variable to match and make know item held 
+          CONTEXT_AF.itemID = data.heldItemId;
+          CONTEXT_AF.isHoldingItem  = true;
+        }
+        console.log("Object Slot Ready");
+        CIRCLES.getCirclesSceneElement().removeEventListener(CIRCLES.EVENTS.READY, readyFunc);
+      };
+      
+      CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.READY, readyFunc);
+    }
+    CONTEXT_AF.el.addEventListener('click', CONTEXT_AF.clickFunc);
+  },
+  update: function(oldData) {
+    const CONTEXT_AF = this;
+    const data = this.data;
+
+    if (Object.keys(data).length === 0) { return; } // No need to update. as nothing here yet
+
+    if ( (oldData.enabled !== data.enabled) && (data.enabled !== '') ) {
+      CONTEXT_AF.el.setAttribute('circles-interactive-object', {enabled:data.enabled});
+    }
+
+    if (oldData.heldItemId != data.heldItemId){
+      //update Item ID
+      CONTEXT_AF.itemID = data.heldItemId;
+      console.log("I received held item status change from update, I am holding " + CONTEXT_AF.itemID);//------------------------------------------------------------
+      //check if empty
+      if (CONTEXT_AF.itemID = ""){
+        CONTEXT_AF.isHoldingItem = false;
+        console.log("I am not holding an item");//-------------------------------------------------------------------------------------------------------------------
+      }
+      else{
+        CONTEXT_AF.isHoldingItem = true;
+        console.log("I am  holding an item");//-----------------------------------------------------------------------------------------------------------------------
+      }
+    }
+  },
+  remove : function() {
+    this.el.removeEventListener('click', this.clickFunc);
+  },
+  clickFunc : function(e) {
+    console.log("Slot has been clicked!");//-----------------------------------------------------------------------------------------------------------------------
+    const CONTEXT_AF = (e) ? e.srcElement.components['solaris-object-slot'] : this;
+    
+    let itemTag = "#" + CONTEXT_AF.heldItemId;
+
+    if (CONTEXT_AF.isHoldingItem === false){
+      let thing = document.querySelector(itemTag);
+      console.log("Item Found: " + thing);
+      entityEl.emit('objectSlotClicked', {slotContext: CONTEXT_AF}, false);
+      //take in object
+        //check if avatar is holding an item 
+        //if yes
+          //query for object id and
+          //call object to attach itself to this context
+    }
+    else{
+      let thing = document.querySelector(itemTag);
+      console.log("Item Found: " + thing);
+      //case has an object
+      //check if player is holding object
+        //if player is not holding an item give then get the object to parent itself to the player
+      
+
+    }
+   
+    /*if (CONTEXT_AF.pickedUp === true) {
+      CONTEXT_AF.release(true, CONTEXT_AF);
+    }
+    else {
+      CONTEXT_AF.pickup(true, CONTEXT_AF);
+    }*/
+  }
+});
+
+
 //proposed solution
 /*on slot interact call object pick up if has held object. 
 THe object handles it's own parenting, and de-parenting. Object is aware of slot and slot is aware of parent.
@@ -15,166 +133,3 @@ remove-child()
 */
 
 
-
-
-AFRAME.registerComponent('circles-pickup-object', {
-  schema: {
-    heldItemId:         {type: "string", default:""},
-    dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
-    dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to orient as after it is released
-    dropScale:          { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //what scale after it is released
-    animate:            { type: "boolean", default:false },                     //whether we animate
-    animateDurationMS:  { type: "number", default:400 },                        //how long animation is
-    enabled:            { type: "boolean", default:true },                      //whethere this works
-  },
-  init: function() {
-    const CONTEXT_AF          = this;
-    const data                = CONTEXT_AF.data;
-    CONTEXT_AF.pickedUp       = false;
-    CONTEXT_AF.rotationFudge  = 0.1;   //seems to be required to have some rotation on inspect so that it animates properly back to orig/dropRotation
-
-    CONTEXT_AF.playerHolder   = null;
-    CONTEXT_AF.origParent     = null;
-
-    if (CONTEXT_AF.el.hasAttribute('circles-interactive-object') === false) {
-      CONTEXT_AF.el.setAttribute('circles-interactive-object', {});
-    }
-
-    if (CIRCLES.isReady()) {
-      CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
-      CONTEXT_AF.origParent = CONTEXT_AF.el.parentNode;
-    }
-    else {
-      const readyFunc = function() {
-        CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
-        CONTEXT_AF.origParent   = CONTEXT_AF.el.parentNode;
-        CIRCLES.getCirclesSceneElement().removeEventListener(CIRCLES.EVENTS.READY, readyFunc);
-      };
-      CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.READY, readyFunc);
-    }
-    CONTEXT_AF.el.addEventListener('click', CONTEXT_AF.clickFunc);
-  },
-  update: function(oldData) {
-    const CONTEXT_AF = this;
-    const data = this.data;
-
-    if (Object.keys(data).length === 0) { return; } // No need to update. as nothing here yet
-
-    if ( (oldData.enabled !== data.enabled) && (data.enabled !== '') ) {
-      CONTEXT_AF.el.setAttribute('circles-interactive-object', {enabled:data.enabled});
-    }
-  },
-  remove : function() {
-    this.el.removeEventListener('click', this.clickFunc);
-  },
-  pickup : function(sendNetworkEvent, passedContext) {
-    const CONTEXT_AF    = (passedContext) ? passedContext : this;
-    const data          = CONTEXT_AF.data;
-    const SAME_DIFF     = 0.001;
-
-    CONTEXT_AF.playerHolder.object3D.attach(CONTEXT_AF.el.object3D);
-
-    const thisPos = {x:CONTEXT_AF.el.object3D.position.x, y:CONTEXT_AF.el.object3D.position.y, z:CONTEXT_AF.el.object3D.position.z};
-    const thisRot = {x:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.x), y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.z)};
-    const thisSca = {x:CONTEXT_AF.el.object3D.scale.x, y:CONTEXT_AF.el.object3D.scale.y, z:CONTEXT_AF.el.object3D.scale.z};
-
-    const pickupPos  = (data.pickupPosition.x < 100001.0) ? {x:data.pickupPosition.x, y:data.pickupPosition.y, z:data.pickupPosition.z} : thisPos;
-    const pickupRot  = (data.pickupRotation.x < 100001.0) ? {x:data.pickupRotation.x, y:data.pickupRotation.y, z:data.pickupRotation.z} : thisRot;
-    const pickupSca  = (data.pickupScale.x < 100001.0) ? {x:data.pickupScale.x, y:data.pickupScale.y, z:data.pickupScale.z} : thisSca;
-
-    //set pickup transforms
-    if (data.animate === true) {
-      CONTEXT_AF.el.setAttribute('animation__cpo_position', { property:'position', dur:(CIRCLES.UTILS.isTheSameXYZ(pickupPos, thisPos, SAME_DIFF) ? 0.0 : data.animateDurationMS), 
-                                                              isRawProperty:true, to:pickupPos, easing:'easeInOutQuad'});
-      CONTEXT_AF.el.setAttribute('animation__cpo_rotation', { property:'rotation', dur:(CIRCLES.UTILS.isTheSameXYZ(pickupRot, thisRot, SAME_DIFF) ? 0.0 : data.animateDurationMS), 
-                                                              isRawProperty:true, to:pickupRot, easing:'easeInOutQuad'});
-      CONTEXT_AF.el.setAttribute('animation__cpo_scale', {    property:'scale', dur:(CIRCLES.UTILS.isTheSameXYZ(pickupSca, thisSca, SAME_DIFF) ? 0.0 : data.animateDurationMS), 
-                                                              isRawProperty:true, to:pickupSca, easing:'easeInOutQuad'});
-    }
-    else {
-      CONTEXT_AF.el.object3D.position.set(pickupPos.x, pickupPos.y, pickupPos.z);
-      CONTEXT_AF.el.object3D.rotation.set(pickupRot.x, pickupRot.y, pickupRot.z);
-      CONTEXT_AF.el.object3D.scale.set(pickupSca.x, pickupSca.y, pickupSca.z);
-    }
-
-    CONTEXT_AF.pickedUp = true;
-
-    //let others know
-    CONTEXT_AF.el.emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
-    CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
-  },
-  release : function(sendNetworkEvent, passedContext) {
-    const CONTEXT_AF  = (passedContext) ? passedContext : this;
-    const data        = CONTEXT_AF.data;
-    const SAME_DIFF   = 0.001;
-
-    //release
-    CONTEXT_AF.origParent.object3D.attach(CONTEXT_AF.el.object3D); //using three's "attach" allows us to retain world transforms during pickup/release
-
-    const thisPos = {x:CONTEXT_AF.el.object3D.position.x, y:CONTEXT_AF.el.object3D.position.y, z:CONTEXT_AF.el.object3D.position.z};
-    const thisRot = {x:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.x), y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.z)};
-    const thisSca = {x:CONTEXT_AF.el.object3D.scale.x, y:CONTEXT_AF.el.object3D.scale.y, z:CONTEXT_AF.el.object3D.scale.z};
-
-    const dropPos  = (data.dropPosition.x < 100001.0) ? {x:data.dropPosition.x, y:data.dropPosition.y, z:data.dropPosition.z} : thisPos;
-    const dropRot  = (data.dropRotation.x < 100001.0) ? {x:data.dropRotation.x, y:data.dropRotation.y, z:data.dropRotation.z} : thisRot;
-    const dropSca  = (data.dropScale.x < 100001.0) ? {x:data.dropScale.x, y:data.dropScale.y, z:data.dropScale.z} : thisSca;
-
-    let artReleaseTimeout = null;
-
-    const releaseEventFunc = function() {
-      //console.log('releaseEventFunc');
-
-      CONTEXT_AF.el.setAttribute('position', {x:dropPos.x, y:dropPos.y, z:dropPos.z});
-      CONTEXT_AF.el.setAttribute('rotation', {x:dropRot.x, y:dropRot.y, z:dropRot.z});
-      CONTEXT_AF.el.setAttribute('scale', {x:dropSca.x, y:dropSca.y, z:dropSca.z});
-
-      //send off event for others
-      CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
-      CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
-      if (data.animate === true && artReleaseTimeout !== null) {
-        clearTimeout(artReleaseTimeout);
-        //CONTEXT_AF.el.removeEventListener('animationcomplete__cpo_position', releaseEventFunc);
-      }
-    };
-    
-    if (data.animate === true) {
-      //need to set release after all animations are done as they were not completing when expected leading to artefacts not dropping to the right place.
-      artReleaseTimeout = setTimeout(function() {
-        releaseEventFunc();
-      }, data.animateDurationMS + 300);
-      //CONTEXT_AF.el.addEventListener('animationcomplete__cpo_position', releaseEventFunc);
-    }
-    else {
-      releaseEventFunc();
-    }
-
-    //set drop transforms, if any
-    if (data.animate === true) {
-      CONTEXT_AF.el.setAttribute('animation__cpo_position', { property:'position', dur:(CIRCLES.UTILS.isTheSameXYZ(dropPos, thisPos, SAME_DIFF) ? 0.0 : data.animateDurationMS), 
-                                                              isRawProperty:true, to:dropPos, easing:'easeInOutQuad'});
-      CONTEXT_AF.el.setAttribute('animation__cpo_rotation', { property:'rotation', dur:(CIRCLES.UTILS.isTheSameXYZ(dropRot, thisRot, SAME_DIFF) ? 0.0 : data.animateDurationMS), 
-                                                              isRawProperty:true, to:dropRot, easing:'easeInOutQuad'});
-      CONTEXT_AF.el.setAttribute('animation__cpo_scale', {    property:'scale', dur:(CIRCLES.UTILS.isTheSameXYZ(dropSca, thisSca, SAME_DIFF) ? 0.0 : data.animateDurationMS),
-                                                              isRawProperty:true, to:dropSca, easing:'easeInOutQuad'});
-    }
-    else {
-      // CONTEXT_AF.el.object3D.position.set(dropPos.x, dropPos.y, dropPos.z);
-      // CONTEXT_AF.el.object3D.rotation.set(dropRot.x, dropRot.y, dropRot.z);
-      // CONTEXT_AF.el.object3D.scale.set(dropSca.x, dropSca.y, dropSca.z);
-    }
-
-    CONTEXT_AF.pickedUp = false;
-
-    //sending a "pre" event to turn off controls before any animations might be done
-    CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT_PRE, null, true);
-  },
-  clickFunc : function(e) {
-    const CONTEXT_AF = (e) ? e.srcElement.components['circles-pickup-object'] : this;
-    if (CONTEXT_AF.pickedUp === true) {
-      CONTEXT_AF.release(true, CONTEXT_AF);
-    }
-    else {
-      CONTEXT_AF.pickup(true, CONTEXT_AF);
-    }
-  }
-});
