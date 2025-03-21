@@ -5,7 +5,8 @@
   <circles-start-scripts/>
 
   <!--Our Scripts-->
- 
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.min.js"></script>   
+  <script src="simple-navmesh-constraint.js"></script>
 </head>
 <body>
   <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
@@ -56,9 +57,9 @@
 
     <!--env models-->
     <a-entity id="environment-model" gltf-model="#env_model" visible='true' sa  shadow="receive:true; cast:true;"></a-entity>
-    <a-entity id="tree-model" gltf-model="#tree_gltf" visible='true' sa shadow="receive:true; cast:true;" position="-9.904 -8.730 -20.546" rotation="0 45 0" scale="0.2 0.2 0.2"></a-entity>
-    <a-entity id="pebble-model" gltf-model="#pebble_gltf" visible='true' sa shadow="receive:true; cast:true;" position="-3.841 0 -0.841" rotation="0 0 0" scale="0.2 0.2 0.2" dynamic-body></a-entity>
-    <a-entity id="rockGroup-model" gltf-model="#rockGroup_gltf" visible='true' sa shadow="receive:true; cast:true;" position="9.202 -0.429 0.971" rotation="0 120 0" scale="1.5 1.5 1.5"></a-entity>
+    <a-entity id="tree-model" gltf-model="#tree_gltf" visible='true' sa shadow="receive:true; cast:true;" position="-9.904 -8.730 -20.546" rotation="0 45 0" scale="0.2 0.2 0.2" static-body></a-entity>
+    <a-entity id="pebble-model" gltf-model="#pebble_gltf" visible='true' sa shadow="receive:true; cast:true;" position="0 2 0" rotation="0 0 0" scale="0.2 0.2 0.2" dynamic-body></a-entity>
+    <a-entity id="rockGroup-model" gltf-model="#rockGroup_gltf" visible='true' sa shadow="receive:true; cast:true;" position="9.202 -0.429 0.971" rotation="0 120 0" scale="1.5 1.5 1.5" static-body></a-entity>
 
     <!--furniture models-->
    
@@ -82,7 +83,18 @@
     
     
       <!--navmesh-->
-    <a-entity id="navmesh" gltf-model="#navmesh_gltf" visible='false'  nav-mesh ></a-entity>
+      <a-box 
+            class="navmesh"
+            static-body 
+            position="0 -0.5 0" 
+            rotation="-90 0 0" 
+            width="20" 
+            height="20" 
+            color="#808080" 
+            visible="false">
+      </a-box>
+
+    <a-entity id="navmesh" gltf-model="#navmesh_gltf" visible='false' nav-mesh></a-entity>
     <a-entity id="skySphere" scale=" 3 3 3">
       <a-sky src = "#sky_map"></a-sky>
     </a-entity>
