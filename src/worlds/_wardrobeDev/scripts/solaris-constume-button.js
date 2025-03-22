@@ -2,7 +2,7 @@
 
 AFRAME.registerComponent('solaris-costume-button', {
     schema: {
-        slotID:   {type: "string", default:"slot1"},
+        slotID:   {type: "string", default:""},
     },
     init: function () {
       const CONTEXT_AF = this;
@@ -17,13 +17,15 @@ AFRAME.registerComponent('solaris-costume-button', {
     },
     onClick : function (e){
         const CONTEXT_AF = (e) ? e.srcElement.components['solaris-costume-button'] : this;
-        const mySlot = document.querySelector('#'+ CONTEXT_AF.slotID);
-        const slotContext = mySlot.srcElement.components['solaris-object-slot'].getContext(mySlot.srcElement.components['solaris-object-slot']);
-        const heldItemID = slotContext.getHeldItemId(slotContext);
-
-        if (!(heldItemID === "EMPTY")){
-            const heldItemType = slotContext.getHeldItemType(slotContext);
-            CONTEXT_AF.el.emit('changeCostume', {itemType:heldItemType}, true)
+        const mySlot = document.querySelector('#slot1');
+        console.log("Geting info from slot with id #" + mySlot.getAttribute('id'));
+        const slotContext = mySlot.components['solaris-object-slot'];
+        const heldItemID = slotContext.getHeldItemId();
+       
+        if (!(heldItemID === "EMPTY")  && !(heldItemID === null )){
+            const heldItemType =  document.querySelector('#' + heldItemID).components['solaris-pickup-object'].getItemType();
+            console.log("Sending request to get head type " +  heldItemType)
+            mySlot.emit('changeCostume', {itemType:heldItemType}, true)
         }
         else{
             console.log("Item type is invalid");
