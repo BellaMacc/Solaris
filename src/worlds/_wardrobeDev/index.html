@@ -1,8 +1,11 @@
 <html>
 <head>
+  
   <!-- Circles' head scripts [REQUIRED] -->
   <circles-start-scripts/>
+  <script src="/src/worlds/_wardrobeDev/scripts/solaris-constume-button.js"></script>
   <script src="/worlds/_wardrobeDev/scripts/avatar-costume-manager.js"></script>
+  
   <!--
   <script src="/worlds/_wardrobeDev/scripts/solaris-object-slot.js"></script>
   <script src="/worlds/_wardrobeDev/scripts/solaris-pickup-object.js"></script>-->
@@ -15,6 +18,7 @@
   <a-scene circles_scene_properties>
     <a-assets timeout = "10000">
       <a-asset-item id = "frog_model" src = "/worlds/_wardrobeDev/assets/froghead.glb"  response-type="arraybuffer"></a-asset-item>
+      <a-asset-item id = "chicken_model" src = "/worlds/_wardrobeDev/assets/chickenHead.glb"  response-type="arraybuffer"></a-asset-item>
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
     </a-assets>
@@ -28,13 +32,15 @@
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
     <!--Test Test Pick Up and Object Slot-->
-    <a-entity id = "item1" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object></a-entity>
-    <a-entity id = "item2" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object></a-entity>
-    <a-entity id = "slot1"  class = "interactive" geometry="primitive: box" position="-1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot = "heldItemId:item1"></a-entity>
-    <a-entity id = "slot2"  class = "interactive" geometry="primitive: box" position="1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ></a-entity>
-    <a-entity id = "slot3"  class = "interactive" geometry="primitive: box" position="-1 0.5 3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ="heldItemId:item2"></a-entity>
-    <a-entity id = "slot4"  class = "interactive" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ></a-entity>
+    <a-entity id = "item1" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object = "itemType:frog"></a-entity>
+    <a-entity id = "item2" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object = "itemType:chicken"></a-entity>
 
+    <a-entity id = "slot1"  class = "interactive" position="-1 0.5 -3" rotation="0 45 0"  solaris-object-slot = "heldItemId:item1"></a-entity>
+    <a-entity id = "slot2"  class = "interactive"  position="1 0.5 -3" rotation="0 45 0"  solaris-object-slot ></a-entity>
+    <a-entity id = "slot3"  class = "interactive"  position="-1 0.5 3" rotation="0 45 0"  solaris-object-slot ="heldItemId:item2"></a-entity>
+    <a-entity id = "slot4"  class = "interactive"  position="1 0.5 3" rotation="0 45 0"  solaris-object-slot ></a-entity>
+
+    <a-entity class = "interactive" position = "-0.042 0.5 -1.851" circles-button solaris-costume-button> </a-entity>
     <!--mirror-->
     <a-entity class="mirror" position="0.0 1.5 -2.5">
       <a-entity class="mirror_edge" position="0.8 0.0 0.0"    geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>

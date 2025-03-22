@@ -23,6 +23,10 @@ AFRAME.registerComponent('solaris-object-slot', {
     CONTEXT_AF.origParent     = null;
     //item related
     CONTEXT_AF.itemID    = "EMPTY";
+
+    //add geometry
+    CONTEXT_AF.el.setAttribute('geometry', {primitive:'box',width:1.2, height:1.2, depth:1.2});
+    CONTEXT_AF.el.setAttribute('material', {color:'#40edb6', opacity:0.1});
     
     //this function will be called when circles is ready
     const setUp = function(){
@@ -36,7 +40,7 @@ AFRAME.registerComponent('solaris-object-slot', {
         CONTEXT_AF.isHoldingItem  = true;
         CONTEXT_AF.itemSetUp();
       }
-      console.log("Object Slot Ready. I am holding " + data.heldItemId);
+      //console.log("Object Slot Ready. I am holding " + data.heldItemId);
     }
     
     //checking if circles is ready
@@ -54,6 +58,14 @@ AFRAME.registerComponent('solaris-object-slot', {
     }
     //addign the on click event listner
     CONTEXT_AF.el.addEventListener('click', CONTEXT_AF.clickFunc);
+    
+    CONTEXT_AF.el.sceneEl.addEventListener('lowerOP', function(event){
+      CONTEXT_AF.lowerOpacity(event.detail.slotContext);
+    });
+
+    CONTEXT_AF.el.sceneEl.addEventListener('raiseOP', function(event){
+      CONTEXT_AF.raiseOpacity(event.detail.slotContext);
+    });
   },
   update: function(oldData) {
     const CONTEXT_AF = this;
@@ -68,20 +80,22 @@ AFRAME.registerComponent('solaris-object-slot', {
     if (oldData.heldItemId != data.heldItemId){
       //update Item ID
       CONTEXT_AF.itemID = data.heldItemId;
-      console.log("I received held item status change from update, I am holding " + CONTEXT_AF.itemID);//------------------------------------------------------------
+      //console.log("I received held item status change from update, I am holding " + CONTEXT_AF.itemID);//------------------------------------------------------------
       //check if empty
       if (CONTEXT_AF.itemID === "EMPTY"){
         CONTEXT_AF.isHoldingItem = false;
-        console.log("I am not holding an item");//-------------------------------------------------------------------------------------------------------------------
+       // console.log("I am not holding an item");//-------------------------------------------------------------------------------------------------------------------
       }
       else{
         CONTEXT_AF.isHoldingItem = true;
-        console.log("I am  holding an item");//-----------------------------------------------------------------------------------------------------------------------
+       // console.log("I am  holding an item");//-----------------------------------------------------------------------------------------------------------------------
       }
     }
   },
   remove : function() {
     this.el.removeEventListener('click', this.clickFunc);
+    CONTEXT_AF.el.removeEventListener('raiseOP', this.raiseOpacity);
+    CONTEXT_AF.el.removeEventListener('lowerOP', this.lowerOpacity);
   },
   clickFunc : function(e) {
     console.log("Slot has been clicked!");//-----------------------------------------------------------------------------------------------------------------------
@@ -95,11 +109,25 @@ AFRAME.registerComponent('solaris-object-slot', {
       //console.log("Item Found: " + thing);
       console.log("Emiting Event")
       CONTEXT_AF.el.emit('objectSlotClicked', {slotContext: CONTEXT_AF}, true);
+      CONTEXT_AF.el.emit('lowerOP', {slotContext: CONTEXT_AF}, true);
+      
     }
     else{
-      let itemElement = document.querySelector(itemTag);
-      console.log("I am holding and item. Item Held: " + itemElement + " other verification"  + itemTag);
-      itemElement.components["solaris-pickup-object"].parentToAvatar();
+      //give to avatar if not already holding something in hand
+      if (CIRCLES.getPickedUpElement() === null){
+        let itemElement = document.querySelector(itemTag);
+        //console.log("I am holding and item. Item Held: " + itemElement + " other verification"  + itemTag);
+        itemElement.components["solaris-pickup-object"].parentToAvatar();
+        //deparent
+        CONTEXT_AF.isHoldingItem = false;
+        CONTEXT_AF.itemID = "EMPTY";
+        CONTEXT_AF.el.emit('raiseOP', {slotContext: CONTEXT_AF}, true);
+      }
+      else{
+        console.log("Already something in hand");
+      }
+      
+      
     }
   
   },
@@ -108,8 +136,9 @@ AFRAME.registerComponent('solaris-object-slot', {
     const CONTEXT_AF = this; 
     CONTEXT_AF.el.emit('setUpItem', {slotContext: CONTEXT_AF, itemID: CONTEXT_AF.itemID}, true);
   },
-  getContext: function(){
+  getContext: function(e){
     //used by other components to get the context, technically not great protection but whatevs
+    const CONTEXT_AF = (e) ? e.srcElement.components['circles-pickup-object'] : this;
     return this;
   },
   deParent: function(){
@@ -120,8 +149,30 @@ AFRAME.registerComponent('solaris-object-slot', {
      
 
     }
-  }
+  },
+  lowerOpacity: function(){
+    const CONTEXT_AF = this.getContext();
+    CONTEXT_AF.el.setAttribute("material", {opacity:0.1});
+    
+  },
+  raiseOpacity:function(){
+    const CONTEXT_AF = this.getContext();
+    CONTEXT_AF.el.setAttribute("material", {opacity:0.9});
 
+  },
+  getHeldItemId: function(e){
+    const CONTEXT_AF = (e) ? e.srcElement.components['solaris-object-slot'] : this;
+    return CONTEXT_AF.itemID;
+  },
+  getHeldItemType: function(e){
+    const CONTEXT_AF = (e) ? e.srcElement.components['solaris-object-slot'] : this;
+    const itemID = CONTEXT_AF.itemID;
+    const item = document.querySelector('#' + itemID);
+    const itemType = item.srcElement.components['solaris-pickup-object'].getItemType(item.srcElement.components['solaris-pickup-object']);
+
+
+
+  },
 });
 
 

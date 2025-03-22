@@ -2,9 +2,7 @@
 
 AFRAME.registerComponent('solaris-pickup-object', {
   schema: {
-    itemType:           {type: "string", default:''},
-    itemID:             {type: "string", default:''},
-    parentID:           {type: "string", defailt:''},
+    itemType:           {type: "string", default:'NONE', oneOf:['NONE', 'frog', 'chicken']},
     pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
     pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
     pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera
@@ -22,12 +20,15 @@ AFRAME.registerComponent('solaris-pickup-object', {
     CONTEXT_AF.playerHolder   = null;
     CONTEXT_AF.origParent     = null;
     CONTEXT_AF.parentContext    = null;
+    CONTEXT_AF.itemType         = "NONE";
+   
 
     //define set up function
     const setUp = function(){
       CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
       CONTEXT_AF.origParent = CONTEXT_AF.el.parentNode;
-      console.log("Pickup Object Ready");
+      CONTEXT_AF.itemType = data.itemType;
+      console.log("Pickup Object Ready of type" + CONTEXT_AF.itemType);
     }
 
 
@@ -43,7 +44,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
     }
     //add event listener for whenever an object slot is clicked
     CONTEXT_AF.el.sceneEl.addEventListener('objectSlotClicked',function(event){
-      console.log("Received Event Object Slot Clicked");
+      //console.log("Received Event Object Slot Clicked");
       if(CONTEXT_AF.pickedUp === true){
         CONTEXT_AF.receiveSlotRequest(event.detail.slotContext);
       }
@@ -56,7 +57,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
       let thisSlotContext = event.detail.slotContext;
 
       if(searchingId === CONTEXT_AF.el.getAttribute('id')){
-        console.log("I am attaching myself to " + thisSlotContext.el.getAttribute('id'))
+        //console.log("I am attaching myself to " + thisSlotContext.el.getAttribute('id'))
         CONTEXT_AF.parentToSlot(thisSlotContext);
       };
     });
@@ -110,7 +111,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
       const parentContext = CONTEXT_AF.parentContext;
       const parentEl = parentContext.el;
       const parentOrigParent = parentEl.parentNode;
-      console.log("Checking parent is " + parentEl.getAttribute('id'));
+      //console.log("Checking parent is " + parentEl.getAttribute('id'));
       
       //release
       parentOrigParent.object3D.attach(CONTEXT_AF.el.object3D); //using three's "attach" allows us to retain world transforms during pickup/release
@@ -118,7 +119,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
 
       const parentPosition = parentEl.getAttribute('position');
       const parentRotation = parentEl.getAttribute('rotation');
-      console.log("Checking new positions is " + parentPosition.x + "," + parentPosition.y);
+      //console.log("Checking new positions is " + parentPosition.x + "," + parentPosition.y);
 
       const thisPos = {x:CONTEXT_AF.el.object3D.position.x, y:CONTEXT_AF.el.object3D.position.y, z:CONTEXT_AF.el.object3D.position.z};
       const thisRot = {x:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.x), y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.z)};
@@ -168,7 +169,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
   },
   parentToAvatar : function() { 
     const CONTEXT_AF = this;
-
+    
     //remove parent context
     CONTEXT_AF.parentContext.el.setAttribute("solaris-object-slot", {heldItemId:"EMPTY"});
     CONTEXT_AF.parentContext = null;
@@ -176,8 +177,10 @@ AFRAME.registerComponent('solaris-pickup-object', {
     //parent to avatar 
     CONTEXT_AF.pickup(true, CONTEXT_AF);
     
+   
+    
   },
-  parentToSlot: function(slotContext){
+  parentToSlot: function(slotContext){  
     const CONTEXT_AF = this;
     CONTEXT_AF.parentContext = slotContext;
     CONTEXT_AF.release(true, CONTEXT_AF);
@@ -201,11 +204,10 @@ AFRAME.registerComponent('solaris-pickup-object', {
       CONTEXT_AF.parentToSlot(slotContext);
     }
   },
-  getItemType: function(){
-
-  },
-  getID: function(){
-
+  getItemType: function(e){
+    const CONTEXT_AF = (e) ? e.srcElement.components['solaris-pickup-object'] : this;
+    return CONTEXT_AF.data.itemType;
+    
   },
  
   getContext: function(){
