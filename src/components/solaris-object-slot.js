@@ -4,10 +4,12 @@
 
 AFRAME.registerComponent('solaris-object-slot', {
   schema: {
-    heldItemId:         {type: "string", default:""},
+    heldItemId:         {type: "string", default:"EMPTY"},
+    pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
+    pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
+    pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera
     dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
-    dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to orient as after it is released
-    dropScale:          { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //what scale after it is released
+    dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },     //what scale after it is released
     enabled:            { type: "boolean", default:true },                      //whethere this works
   },
   init: function() {
@@ -20,38 +22,37 @@ AFRAME.registerComponent('solaris-object-slot', {
     CONTEXT_AF.playerHolder   = null;
     CONTEXT_AF.origParent     = null;
     //item related
-    CONTEXT_AF.itemID    = "NULL";
+    CONTEXT_AF.itemID    = "EMPTY";
     
-   
-    
-    
-    if (CIRCLES.isReady()) {
+    //this function will be called when circles is ready
+    const setUp = function(){
       CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
       CONTEXT_AF.origParent = CONTEXT_AF.el.parentNode;
       
-      if (data.heldItemId != ""){
+      //check if an item has been assigned to the item slot
+      if (!(data.heldItemId === "EMPTY")){
          //if heldItem ID is not empty set the Context Variable to match and make know item held 
         CONTEXT_AF.itemID = data.heldItemId;
         CONTEXT_AF.isHoldingItem  = true;
+        CONTEXT_AF.itemSetUp();
       }
-      console.log("Object Slot Ready");
+      console.log("Object Slot Ready. I am holding " + data.heldItemId);
     }
-    else {
+    
+    //checking if circles is ready
+    if (CIRCLES.isReady()) {
+      setUp();
+    }
+    else {//if circles is not set up wait for it to be
+      //setting up cuntion to be called by event listener
       const readyFunc = function() {
-        CONTEXT_AF.playerHolder = CIRCLES.getAvatarHolderElementBody();  //this is our player holder
-        CONTEXT_AF.origParent   = CONTEXT_AF.el.parentNode;
-        
-        if (data.heldItemId != ""){
-           //if heldItem ID is not empty set the Context Variable to match and make know item held 
-          CONTEXT_AF.itemID = data.heldItemId;
-          CONTEXT_AF.isHoldingItem  = true;
-        }
-        console.log("Object Slot Ready");
+        setUp();
         CIRCLES.getCirclesSceneElement().removeEventListener(CIRCLES.EVENTS.READY, readyFunc);
       };
-      
+      //eventListner for when circles is set up
       CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.READY, readyFunc);
     }
+    //addign the on click event listner
     CONTEXT_AF.el.addEventListener('click', CONTEXT_AF.clickFunc);
   },
   update: function(oldData) {
@@ -69,7 +70,7 @@ AFRAME.registerComponent('solaris-object-slot', {
       CONTEXT_AF.itemID = data.heldItemId;
       console.log("I received held item status change from update, I am holding " + CONTEXT_AF.itemID);//------------------------------------------------------------
       //check if empty
-      if (CONTEXT_AF.itemID = ""){
+      if (CONTEXT_AF.itemID === "EMPTY"){
         CONTEXT_AF.isHoldingItem = false;
         console.log("I am not holding an item");//-------------------------------------------------------------------------------------------------------------------
       }
@@ -86,35 +87,41 @@ AFRAME.registerComponent('solaris-object-slot', {
     console.log("Slot has been clicked!");//-----------------------------------------------------------------------------------------------------------------------
     const CONTEXT_AF = (e) ? e.srcElement.components['solaris-object-slot'] : this;
     
-    let itemTag = "#" + CONTEXT_AF.heldItemId;
+    //this just adds the # to the item id string because querySelector requires the #
+    let itemTag = "#" + CONTEXT_AF.itemID;
 
     if (CONTEXT_AF.isHoldingItem === false){
-      let thing = document.querySelector(itemTag);
-      console.log("Item Found: " + thing);
-      entityEl.emit('objectSlotClicked', {slotContext: CONTEXT_AF}, false);
-      //take in object
-        //check if avatar is holding an item 
-        //if yes
-          //query for object id and
-          //call object to attach itself to this context
+      //let thing = document.querySelector(itemTag);
+      //console.log("Item Found: " + thing);
+      console.log("Emiting Event")
+      CONTEXT_AF.el.emit('objectSlotClicked', {slotContext: CONTEXT_AF}, true);
     }
     else{
-      let thing = document.querySelector(itemTag);
-      console.log("Item Found: " + thing);
-      //case has an object
-      //check if player is holding object
-        //if player is not holding an item give then get the object to parent itself to the player
-      
+      let itemElement = document.querySelector(itemTag);
+      console.log("I am holding and item. Item Held: " + itemElement + " other verification"  + itemTag);
+      itemElement.components["solaris-pickup-object"].parentToAvatar();
+    }
+  
+  },
+  itemSetUp: function(){
+    //this is called at the start if the item slot is assigned an item to hold
+    const CONTEXT_AF = this; 
+    CONTEXT_AF.el.emit('setUpItem', {slotContext: CONTEXT_AF, itemID: CONTEXT_AF.itemID}, true);
+  },
+  getContext: function(){
+    //used by other components to get the context, technically not great protection but whatevs
+    return this;
+  },
+  deParent: function(){
+    //used by other components to update the item held to be empty
+    const CONTEXT_AF = this;
+    if (CONTEXT_AF.isHoldingItem){
+      CONTEXT_AF.el.setAttribute("solaris-object-slot", {heldItemId:"EMPTY"})
+     
 
     }
-   
-    /*if (CONTEXT_AF.pickedUp === true) {
-      CONTEXT_AF.release(true, CONTEXT_AF);
-    }
-    else {
-      CONTEXT_AF.pickup(true, CONTEXT_AF);
-    }*/
   }
+
 });
 
 
