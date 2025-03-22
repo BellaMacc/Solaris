@@ -29,8 +29,11 @@
 
     <!--Test Test Pick Up and Object Slot-->
     <a-entity id = "item1" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object></a-entity>
+    <a-entity id = "item2" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object></a-entity>
     <a-entity id = "slot1"  class = "interactive" geometry="primitive: box" position="-1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot = "heldItemId:item1"></a-entity>
     <a-entity id = "slot2"  class = "interactive" geometry="primitive: box" position="1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ></a-entity>
+    <a-entity id = "slot3"  class = "interactive" geometry="primitive: box" position="-1 0.5 3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ="heldItemId:item2"></a-entity>
+    <a-entity id = "slot4"  class = "interactive" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#4CC3D9" solaris-object-slot ></a-entity>
 
     <!--mirror-->
     <a-entity class="mirror" position="0.0 1.5 -2.5">
