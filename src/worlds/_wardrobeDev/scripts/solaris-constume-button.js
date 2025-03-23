@@ -21,9 +21,9 @@ AFRAME.registerComponent('solaris-costume-button', {
         console.log("Geting info from slot with id #" + mySlot.getAttribute('id'));
         const slotContext = mySlot.components['solaris-object-slot'];
         const heldItemID = slotContext.getHeldItemId();
-       
+        console.log("Checking held item id: " + heldItemID);
         if (!(heldItemID === "EMPTY")  && !(heldItemID === null )){
-            const heldItemType =  document.querySelector('#' + heldItemID).components['solaris-pickup-object'].getItemType();
+            const heldItemType = slotContext.getHeldItemType();
             console.log("Sending request to get head type " +  heldItemType)
             mySlot.emit('changeCostume', {itemType:heldItemType}, true)
         }

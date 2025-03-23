@@ -169,7 +169,7 @@ AFRAME.registerComponent('solaris-object-slot', {
     const itemID = CONTEXT_AF.itemID;
     const item = document.querySelector('#' + itemID);
     const itemType = item.components['solaris-pickup-object'].getItemType();
-
+    return itemType;
 
 
   },
