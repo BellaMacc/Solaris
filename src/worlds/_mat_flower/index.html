@@ -5,8 +5,8 @@
   <!-- Circles' head scripts [REQUIRED] -->
   <circles-start-scripts/>
 
-  <script src = '/worlds/_Mat_Dev_Flower/scripts/moodFlower-bttn.js'> </script>
-  <script src = '/worlds/_Mat_Dev_Flower/scripts/solaris-systemDetection.js'> </script>
+  <script src = '/worlds/_mat_flower/scripts/moodFlower-bttn.js'> </script>
+
 </head>
 <body>
   <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
@@ -14,14 +14,14 @@
 
   <!-- a-scene with 'circles-properties' component [REQUIRED] -->
    <!------------------------------------------------------SCENE------------------------------------------------------------------------->
-  <a-scene circles_scene_properties >
+  <a-scene circles_scene_properties mat-user-device>
     <a-assets>
        <!--Our Assets-->
-       <audio id="winSound" src="/worlds/_Mat_Dev_Flower/assets/sounds/testSound.mp3" preload="true"></audio> 
-       <audio id="lossSound" src="/worlds/_Mat_Dev_Flower/assets/sounds/oof.mp3" preload="true"></audio>
+       <audio id="winSound" src="/worlds/_mat_flower/assets/sounds/testSound.mp3" preload="true"></audio> 
+       <audio id="lossSound" src="/worlds/_mat_flower/assets/sounds/oof.mp3" preload="true"></audio>
  
        <!-- Flower assets -->
-       <a-asset-item id="default_flower" src="/worlds/_Mat_Dev_Flower/assets/models/scene.gltf" response-type="arraybuffer"></a-asset-item>
+       <a-asset-item id="default_flower" src="/worlds/_mat_flower/assets/models/flowerStart.glb" response-type="arraybuffer"></a-asset-item>
 
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
@@ -29,7 +29,7 @@
     </a-assets>
     <!-----------------------------------------------------STAGE------------------------------------------------------------------------->
     
-    <a-entity solaris-moodFlower solaris_systemDetection></a-entity>
+    
     <!-- start your code: put your A-frame, Circles XR, and custom components here -->
      <!----------------------------------------Enviroment--------------------------------------------->
     <a-entity geometry="primitive: plane; height: 60; width:60;" position="0 -.1 0" rotation="-90 0 0" material="color:skyblue;" ></a-entity>
@@ -43,30 +43,39 @@
       value="Initial Text"
       position="0 2 -3"
       color="black"
-      moodFlower-bttn>
+      > 
     </a-text>
 
     <!----------------------------------------Mood Buttons--------------------------------------------->
-    <a-entity circles-button="button_color:rgb(24, 138, 243);" 
+    <a-entity id = "test1" class = "interactive" position = "1 0.5 3" moodflower-bttn geometry></a-entity>
+    <a-entity id = "test2" class = "interactive"  position = "-1 0.5 3" solaris-moodflower geometry></a-entity>
+    <a-entity  id = "bttn1"
+     
+      circles-button="button_color:rgb(24, 138, 243);" 
       circles-interactive-object="highlight_color:rgb(74, 87, 0);"
+      moodflower-bttn
       position="5 0 4" 
       rotation="0 0 0" 
       scale="1 1 1"
-      moodFlower-bttn>
+      >
     </a-entity>
-    <a-entity circles-button="button_color:rgb(227, 37, 16);" 
+    <a-entity id = "bttn2"
+      solaris-moodFlower
+      circles-button="button_color:rgb(227, 37, 16);" 
       circles-interactive-object="highlight_color:rgb(74, 87, 0);"
       position="5 0 3" 
       rotation="0 0 0" 
       scale="1 1 1">
     </a-entity>
-    <a-entity circles-button="button_color:rgb(255, 213, 5);" 
+    <a-entity id = "bttn3"
+      circles-button="button_color:rgb(255, 213, 5);" 
       circles-interactive-object="highlight_color:rgb(74, 87, 0);"
       position="5 0 2" 
       rotation="0 0 0" 
       scale="1 1 1">
     </a-entity>
-    <a-entity circles-button="button_color:rgb(201, 84, 209);" 
+    <a-entity id = "bttn4"
+     circles-button="button_color:rgb(201, 84, 209);" 
       circles-interactive-object="highlight_color:rgb(74, 87, 0);"
       position="5 0 1" 
       rotation="0 0 0" 
