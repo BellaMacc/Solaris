@@ -1,0 +1,106 @@
+<html>
+<head>
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+  
+  <!-- MAT'S PLAYER STRUCT, CREATED ON 02-24 -->
+  <script>
+    //Basic struct like 
+    window.solaris = {
+      system : {
+          Desktop : false,
+          Portable  : false,
+          Headset : false
+      }
+    };
+    console.log("PLAYER SYSTEM", window.solaris.system);
+  </script>
+  <scritp src="src\worlds\_Mat_Dev_Flower\scripts\solaris-moodFlower.js"></scritp>
+  <scritp src="src\worlds\_Mat_Dev_Flower\scripts\solaris-systemDetection.js"></scritp>
+
+
+</head>
+<body>
+ 
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties mat-flowerButton>
+          <!-- Belongs to systemDetection.js - Mat Created 02-21, Mat updated 02-24 - This is a function that runs a system check (mobile, VR, or PC)-->
+    
+    <a-assets timeout="10000">
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+
+      <!--Our Assets-->
+      <audio id="winSound" src="/worlds/_Mat_Dev_Flower/assets/testSound.mp3" preload="true"></audio> 
+      <audio id="lossSound" src="/worlds/_Mat_Dev_Flower/assets/sounds/oof.mp3" preload="true"></audio>
+
+      <!-- Flower assets -->
+      <a-asset-item id="default_flower" src="/worlds/_Mat_Dev_Flower/assets/models/scene.gltf" response-type="arraybuffer"></a-asset-item>
+
+
+    </a-assets>
+
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+
+    <!--Add Code Here-->
+    <a-entity id="spawn" 
+    circles-checkpoint circles-interactive-object="highlight_color:rgb(74, 230, 95); click_sound:#winSound;"
+     circles-spawnpoint position="0.0 0.0 0" ></a-entity>
+    <a-entity circles-checkpoint
+     circles-interactive-object="highlight_color:rgb(74, 230, 95); click_sound:#winSound;"
+     position="2.5 0 3.0" ></a-entity>
+    <a-entity 
+    circles-checkpoint circles-interactive-object="highlight_color:rgb(74, 230, 95); click_sound:#winSound;" 
+    position="-2.5 0 3.0" ></a-entity>
+
+    <a-entity geometry="primitive: plane; height: 60; width:60;" position="0 -.1 0" rotation="-90 0 0" material="color:skyblue;" ></a-entity>
+
+    <a-entity sound="src: #audiosource"></a-entity>
+    <a-entity id="audiosource" circles-sound="type:ambient; src:#winSound; autoplay:true; loop:false; volume:1.0;" sound="refDistance:10; rolloffFactor:4.0;"></a-entity>
+
+    <a-text onClick-flowerButton
+      id="displayText" 
+      value="Initial Text"
+      position="0 2 -3"
+      color="black"
+      onClick-flowerButton>
+    </a-text>
+
+    <!-- Mood Buttons -->
+    <a-entity circles-button="button_color:rgb(24, 138, 243);" 
+      circles-interactive-object="highlight_color:rgb(74, 87, 0);"
+      position="5 0 4" 
+      rotation="0 0 0" 
+      scale="1 1 1"
+      onClick-flowerButton>
+    </a-entity>
+    <a-entity circles-button="button_color:rgb(227, 37, 16);" 
+      circles-interactive-object="highlight_color:rgb(74, 87, 0);"
+      position="5 0 3" 
+      rotation="0 0 0" 
+      scale="1 1 1">
+    </a-entity>
+    <a-entity circles-button="button_color:rgb(255, 213, 5);" 
+      circles-interactive-object="highlight_color:rgb(74, 87, 0);"
+      position="5 0 2" 
+      rotation="0 0 0" 
+      scale="1 1 1">
+    </a-entity>
+    <a-entity circles-button="button_color:rgb(201, 84, 209);" 
+      circles-interactive-object="highlight_color:rgb(74, 87, 0);"
+      position="5 0 1" 
+      rotation="0 0 0" 
+      scale="1 1 1">
+    </a-entity>
+
+  </a-scene>
+
+
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>
