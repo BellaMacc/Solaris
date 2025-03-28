@@ -1,22 +1,13 @@
 'use strict';
 
 
-AFRAME.registerComponent("solaris-moodFlower", {
+AFRAME.registerComponent("solaris-moodflower", {
     init: function(){
-        setTimeout('10000');
+        //setTimeout('10000');
         const CONTEXT_AF          = this;
         const data                = CONTEXT_AF.data;
-        console.log("FLOWER BUTTONR READY");
+        console.log("Solaris FLOWER BUTTONR READY");
 
-        if (CIRCLES.isReady()) {
-            console.log("FLOWER BUTTONR READY");
-          }
-          else {
-            const readyFunc = function() {
-              console.log("FLOWER BUTTON READY");
-              CIRCLES.getCirclesSceneElement().removeEventListener(CIRCLES.EVENTS.READY, readyFunc);
-            };
-            CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.READY, readyFunc);
-          }
+       
     },
 });

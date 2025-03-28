@@ -38,3 +38,5 @@ require('./circles-user-networked');
 require('./circles-enter-ui');
 require('./mat-user-device.js');
 require('./sproot-dialogue.js');
+require('./solaris-moodFlower.js');
+
