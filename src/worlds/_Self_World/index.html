@@ -1,0 +1,75 @@
+<html>
+<head>
+  
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+
+  <!--Our Scripts-->
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.min.js"></script>   
+  <script src="simple-navmesh-constraint.js"></script>
+</head>
+<body>
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties>
+    <a-assets timeout="10000">
+        <!--OurLoaded in Assets-->
+        <!--Env-->
+        <a-asset-item id="env_model" src="/worlds/_Self_World/assets/models/self_world_3.glb" response-type="arraybuffer" ></a-asset-item>
+        <a-asset-item id="nav_model" src="/worlds/_Self_World/assets/models/self_world_navMesh.glb" response-type="arraybuffer" ></a-asset-item>
+        <!--NPCs-->
+
+        <!--papers-->
+       
+        <!--Images-->
+        <img id="sky_map" src = "/worlds/_b_SelfWorld/assets/textures/cloudy_sky.jpg"></img>
+
+        <!--Sound-->
+        
+
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+    
+    </a-assets> <!---------------------------------------------------------------------------------------------------------->
+    
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+
+    <!--light-->
+    <!--<a-entity light="type:point; color:#e1c2a8; groundColor:#499763; intensity: 22" position = "3.994 6.292 -5.825"></a-entity>--> 
+   <a-entity light="type:directional; color:#ffffff; groundColor:#499763; intensity: 1" position = "-15.048 16.165 -15.023"></a-entity>
+    <a-entity light="type:ambient; color:#f1ffa8; groundColor:#6edd93; intensity: 2.0" position = "0 10 -7"></a-entity>
+
+    <!--env models-->
+    <a-entity id="environment-model" gltf-model="#env_model" visible='false'   shadow="receive:false; cast:false;"></a-entity>
+   
+    <!--furniture models-->
+   
+    <!--npc models-->
+    
+    <!---->
+      <!--navmesh-->
+      <a-entity id="navmesh" gltf-model="#nav_model" visible='true' nav-mesh></a-entity>
+      <!--checkpoints-->
+    <a-entity circles-checkpoint position="0.108 0.05 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="0.108 0.688 -8.301"></a-entity>
+    <a-entity circles-checkpoint position="-2.93 0.688 -7.768"></a-entity>
+    <a-entity circles-checkpoint position="-3.02 0.688 -13.54"></a-entity>
+    <a-entity circles-checkpoint position="0.338 0.688 -15.96"></a-entity>
+    <a-entity circles-checkpoint position="4.426 0.688 -12.73"></a-entity>
+    <a-entity circles-checkpoint position="6.471 0.688 -8.434"></a-entity>
+
+    <!--skymap -->
+    <a-entity id="skySphere" scale=" 3 3 3">
+      <a-sky src = "#sky_map"></a-sky>
+    </a-entity>
+  </a-scene>
+
+  <script>
+  </script>
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>
