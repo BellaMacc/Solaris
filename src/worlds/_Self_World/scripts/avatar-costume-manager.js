@@ -23,16 +23,19 @@ AFRAME.registerComponent('avatar-costume-manager', {
         const avatarNode    = avatar.querySelector('.user_' + 'head');
         console.log("Head Changing Received");
 
+        let newHeadSrc = CIRCLES.DEFAULT_GLTF_HEAD;
+
         if (itemType === "frog"){
-            avatarNode.setAttribute("gltf-model", '#frog_model');
+            newHeadSrc = CIRCLES.SOLARIS_HEADS['frog'];
+            
         }
         else if (itemType === "chicken"){
-            avatarNode.setAttribute("gltf-model", '#chicken_model');
+            newHeadSrc = CIRCLES.SOLARIS_HEADS['chicken'];
         }
         else{
             console.log("Head did not change item type not found");
         }
-
+        avatarNode.setAttribute("gltf-model", newHeadSrc);
         
 
     },

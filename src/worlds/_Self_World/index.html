@@ -21,7 +21,8 @@
         <a-asset-item id="nav_model" src="/worlds/_Self_World/assets/models/self_world_navMesh.glb" response-type="arraybuffer" ></a-asset-item>
         <!--NPCs-->
 
-        <!--papers-->
+        <!--Objects-->
+
        
         <!--Images-->
         <img id="sky_map" src = "/worlds/_b_SelfWorld/assets/textures/cloudy_sky.jpg"></img>
@@ -49,6 +50,14 @@
    
     <!--npc models-->
     
+    
+    <!--Pick Up Objects-->
+      <a-entity id = "item1" solaris-pickup-object = "itemType:frog"> </a-entity>
+      <a-entity id = "item2" solaris-pickup-object = "itemType:chicken"> </a-entity>
+    <!--Object Slots-->
+      <a-entity id = "slot1" class = "interactive" solaris-object-slot> </a-entity>
+      <a-entity id = "slot2" class = "interactive" solaris-object-slot = "heldItemId:item1"> </a-entity>
+      <a-entity id = "slot3" class = "interactive" solaris-object-slot = "heldItemId:item2"> </a-entity>
     <!---->
       <!--navmesh-->
       <a-entity id="navmesh" gltf-model="#nav_model" visible='true' nav-mesh></a-entity>
