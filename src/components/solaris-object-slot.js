@@ -42,7 +42,7 @@ AFRAME.registerComponent('solaris-object-slot', {
       }
       //console.log("Object Slot Ready. I am holding " + data.heldItemId);
     }
-    
+    //
     //checking if circles is ready
     if (CIRCLES.isReady()) {
       setUp();
