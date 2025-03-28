@@ -75,6 +75,13 @@ const MODEL_HEAD_TYPE = {
   head_4   : '/global/assets/models/gltf/head/Head_Thin.glb',
 };
 
+//solaris models
+const SOLARIS_HEADS = {
+  frog     : '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  chicken  :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+}
+
+
 const MODEL_HAIR_TYPE = {
   hair_0   : '/global/assets/models/gltf/hair/Hair_Curly.glb',
   hair_1   : '/global/assets/models/gltf/hair/Hair_Long.glb',
@@ -390,5 +397,6 @@ module.exports = {
   enableWarning,
   error,
   enableErrors,
-  getVRPlatform
+  getVRPlatform,
+  SOLARIS_HEADS,
 };

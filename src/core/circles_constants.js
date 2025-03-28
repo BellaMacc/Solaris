@@ -58,6 +58,8 @@ const GUI = {
   font_header: '/global/assets/fonts/Roboto-msdf.json'
 };
 
+
+
 module.exports = {
   MAX_USERS,
   DEFAULT_USER_HEIGHT,
@@ -96,5 +98,8 @@ module.exports = {
   CONTROLS_OFFSET_Z,
   CONTROLS_SNAP_ROTATE,
   CONTROLS_SNAP_TRANSLATE,
-  GUI
+  GUI,
+  SOLARIS_CHICKEN_HEAD,
+  SOLARIS_FROG_HEAD
+
 };
