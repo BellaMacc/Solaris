@@ -46,7 +46,7 @@
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/>
 
-    <!--Add Code Here-->
+    <!--Portals-->
     <a-entity id="spawn" 
     circles-checkpoint circles-interactive-object="highlight_color:rgb(74, 230, 95); click_sound:#winSound;"
      circles-spawnpoint position="0.0 0.0 0" ></a-entity>
@@ -58,10 +58,12 @@
     position="-2.5 0 3.0" ></a-entity>
 
     <a-entity geometry="primitive: plane; height: 60; width:60;" position="0 -.1 0" rotation="-90 0 0" material="color:skyblue;" ></a-entity>
-
+    
+    <!--Audio sources-->
     <a-entity sound="src: #audiosource"></a-entity>
     <a-entity id="audiosource" circles-sound="type:ambient; src:#winSound; autoplay:true; loop:false; volume:1.0;" sound="refDistance:10; rolloffFactor:4.0;"></a-entity>
 
+    <!--Flower Buttons-->
     <a-text onClick-flowerButton
       id="displayText" 
       value="Initial Text"
@@ -76,7 +78,7 @@
       position="5 0 4" 
       rotation="0 0 0" 
       scale="1 1 1"
-      onClick-flowerButton>
+      >
     </a-entity>
     <a-entity circles-button="button_color:rgb(227, 37, 16);" 
       circles-interactive-object="highlight_color:rgb(74, 87, 0);"
