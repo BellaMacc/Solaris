@@ -73,7 +73,16 @@ const MODEL_HEAD_TYPE = {
   head_2   : '/global/assets/models/gltf/head/Head_Oval.glb',
   head_3   : '/global/assets/models/gltf/head/Head_Square.glb',
   head_4   : '/global/assets/models/gltf/head/Head_Thin.glb',
+  head_5   : '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  head_6   :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
 };
+
+//solaris models
+const SOLARIS_HEADS = {
+  frog     : '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  chicken  :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+}
+
 
 const MODEL_HAIR_TYPE = {
   hair_0   : '/global/assets/models/gltf/hair/Hair_Curly.glb',
@@ -390,5 +399,6 @@ module.exports = {
   enableWarning,
   error,
   enableErrors,
-  getVRPlatform
+  getVRPlatform,
+  SOLARIS_HEADS,
 };
