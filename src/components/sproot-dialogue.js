@@ -5,24 +5,34 @@
 AFRAME.registerComponent('onclick-sproot', {
     schema: {
       isPlaying:  {type:'boolean', default:false},
+      modelID: {type: 'string', default:'#sproot'},
+      dialogueID: {type: 'string', default:'#dialogue'},
+     
      
     },
     init: function() {
       const CONTEXT_AF = this;
-      this.el.addEventListener('click', function(){
-        
+      const data = CONTEXT_AF.data;
+
+      CONTEXT_AF.modelID = data.modelID;
+      CONTEXT_AF.dialogueID = data.dialogueID;
+
+      this.el.addEventListener('click', function(e){
         console.log("I am clicked!");
+        const CONTEXT_AF = (e) ? e.srcElement.components['onclick-sproot'] : this;
         
-        
-          CONTEXT_AF.isPlaying = true;
-          let sproot = document.querySelector("#sproot");
-          let dialogue = document.querySelector("#dialogue");
-          sproot.setAttribute("animation-mixer", "clip: Sproot_Waving; loop:once");
-          dialogue.setAttribute('circles-sound', {state: 'play'});
+        console.log(CONTEXT_AF.modelID);
+        console.log(CONTEXT_AF.dialogueID);
+        let sproot = document.querySelector(CONTEXT_AF.modelID);
+        console.log(sproot);
+        let dialogue = document.querySelector(CONTEXT_AF.dialogueID);
+        console.log(dialogue);
+        sproot.setAttribute("animation-mixer", "clip: Sproot_Waving; loop:once");
+        dialogue.setAttribute('circles-sound', {state: 'play'});
      
-          setTimeout(function(){
-            sproot.setAttribute("animation-mixer", "clip: Sproot_Idle; loop:repeat");
-          }, 8000)
+        setTimeout(function(){
+          sproot.setAttribute("animation-mixer", "clip: Sproot_Idle; loop:repeat");
+        }, 8000)
         
         
         
