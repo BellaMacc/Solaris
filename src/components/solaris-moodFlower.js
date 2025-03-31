@@ -7,7 +7,5 @@ AFRAME.registerComponent("solaris-moodflower", {
         const CONTEXT_AF          = this;
         const data                = CONTEXT_AF.data;
         console.log("Solaris FLOWER BUTTONR READY");
-
-       
     },
 });
