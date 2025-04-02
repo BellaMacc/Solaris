@@ -31,7 +31,11 @@ const DEFAULT_USER_BOUNDARY   = '/global/assets/models/gltf/User_Boundary.glb';
 //textures
 const DEFAULT_ENV_MAP         = '/global/assets/textures/equirectangular/WhiteBlue.jpg';
 const DEFAULT_WIREFRAME_MAP   = '/global/assets/textures/wireframe.png';
-const DEFAULT_FACE_HAPPY_MAP  = '/global/assets/textures/facialExpressions/Happy.png';
+//const DEFAULT_FACE_HAPPY_MAP  = '/global/assets/textures/facialExpressions/Happy.png';
+
+//solaris - Modified - textures
+const DEFAULT_FACE_HAPPY_MAP  = '/global/assets/textures/solaris/empty.png';
+const SOLARIS_FACE_NONE       = '/global/assets/textures/solaris/empty.png';
 
 const ICON_DEVICE_DESKTOP     = '/global/assets/textures/icons/Icon_Device-Desktop.png';
 const ICON_DEVICE_MOBILE      = '/global/assets/textures/icons/Icon_Device-Mobile.png';
@@ -41,6 +45,7 @@ const ICON_DEVICE_UNKNOWN     = '/global/assets/textures/icons/Icon_Device-Unkno
 const ICON_ROTATE             = '/global/assets/textures/icons/Icon-Rotate.png';
 const ICON_ZOOM               = '/global/assets/textures/icons/Icon-Zoom.png';
 const ICON_RELEASE            = '/global/assets/textures/icons/Icon-Release.png';
+
 
 const DEFAULT_CHECKPOINT_COLOR  = 'rgb(57, 187, 130)';
 const DEFAULT_SNAP_TURN_DEG     = 30.0;
@@ -99,6 +104,8 @@ module.exports = {
   CONTROLS_SNAP_ROTATE,
   CONTROLS_SNAP_TRANSLATE,
   GUI,
+
+  SOLARIS_FACE_NONE,
   
 
 };

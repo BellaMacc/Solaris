@@ -22,10 +22,21 @@ AFRAME.registerComponent('solaris-costume-button', {
         const slotContext = mySlot.components['solaris-object-slot'];
         const heldItemID = slotContext.getHeldItemId();
         console.log("Checking held item id: " + heldItemID);
+        
+        // //---- Mat added this as a test for socket connections. this will be removed later
+        // let socket = io();
+        // let userData = "bingo"; 
+        // socket.on('connect', (userData) => {
+        //     console.log(socket);
+        // });
+
+        //socket.emit('broadcast', "Shploog");
+
         if (!(heldItemID === "EMPTY")  && !(heldItemID === null )){
             const heldItemType = slotContext.getHeldItemType();
             console.log("Sending request to get head type " +  heldItemType)
             mySlot.emit('changeCostume', {itemType:heldItemType}, true)
+
         }
         else{
             console.log("Item type is invalid");
