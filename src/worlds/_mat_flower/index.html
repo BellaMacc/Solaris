@@ -30,30 +30,41 @@
     </a-assets>
     <!-----------------------------------------------------STAGE------------------------------------------------------------------------->
     <a-entity id="pedestal" gltf-model="#pedestal_test"
-    scale = "30 30 30" position = "0 0 0" rotation="0 0 0" 
+      scale = "120 120 120" position = "0 -0.170 -3.868" rotation="0 -40 0" 
     ></a-entity>
 
-
-    <!-- SAD FLOWER -->
-    <a-entity id="flower1" gltf-model="#default_flower" 
-    animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
-    scale = "3 3 3" position = "5.896 0.265 3.919" rotation="3.447 -172.976 25.775" 
-    ></a-entity>
-    <!-- ANGRY FLOWER -->
-    <a-entity id="flower2" gltf-model="#default_flower" 
-    animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
-    scale = "3 3 3" position = "5.896 0.265 2.919" rotation="3.447 -172.9s76 25.775" 
-    ></a-entity>
-    <!-- HAPPY FLOWER -->
-    <a-entity id="flower3" gltf-model="#default_flower" 
-    animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
-    scale = "3 3 3" position = "5.896 0.265 1.919" rotation="3.447 -172.976 25.775" 
-    ></a-entity>
-    <!-- FEAR FLOWER -->
-    <a-entity id="flower4" gltf-model="#default_flower" 
-    animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
-    scale = "3 3 3" position = "5.896 0.265 0.919" rotation="3.447 -172.976 25.775" 
-    ></a-entity>
+    <a-entity id="Bouquet" position="0 0 0" rotation="0 90 0" scale="1 1 1">
+      <!-- FAKE FLOWER -->
+      <a-entity id="flower0" gltf-model="#default_flower"
+        animation-mixer="clip: *; timeScale: 0;"
+        scale = "3 3 3" position = "0 0.265 0" rotation="3.447 -172.976 25.775" 
+        visible="true" 
+      ></a-entity>
+      <!-- SAD FLOWER -->
+      <a-entity id="flower1" gltf-model="#default_flower" 
+        animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
+        scale = "3 3 3" position = "0 0.265 0" rotation="3.447 -172.976 25.775" 
+        visible="false" 
+      ></a-entity>
+      <!-- ANGRY FLOWER -->
+      <a-entity id="flower2" gltf-model="#default_flower" 
+        animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
+        scale = "3 3 3" position = "0 0.265 0" rotation="3.447 -172.9s76 25.775" 
+        visible="false" 
+      ></a-entity>
+      <!-- HAPPY FLOWER -->
+      <a-entity id="flower3" gltf-model="#default_flower" 
+        animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
+        scale = "3 3 3" position = "0 0.265 0" rotation="3.447 -172.976 25.775" 
+        visible="false" 
+      ></a-entity>
+      <!-- FEAR FLOWER -->
+      <a-entity id="flower4" gltf-model="#default_flower" 
+        animation-mixer="clip: *; timeScale: 0; loop: once; clampWhenFinished: true;"
+        scale = "3 3 3" position = "0 0.265 0" rotation="3.447 -172.976 25.775" 
+        visible="false" 
+      ></a-entity>
+  </a-entity>
 
     <!-- start your code: put your A-frame, Circles XR, and custom components here -->
      <!----------------------------------------Enviroment--------------------------------------------->
@@ -68,48 +79,41 @@
       value="Initial Text"
       position="0 2 -3"
       color="black"
-      > 
-    </a-text>
+    ></a-text>
 
     <!----------------------------------------Mood Buttons--------------------------------------------->
-    <!-- BLUE -->
-    <a-entity  id = "bttn1"
-      moodflower-bttn="sadness"
-      circles-button="button_color:rgb(24, 138, 243); button_color_hover:rgb(36, 155, 255);" 
-      position="5 0 4" 
-      rotation="0 0 0" 
-      scale="1 1 1"
-      >
+    <a-entity id="buttonPlaque" position="1.5 0 1.5" rotation="0 270 0" scale="1 1 1">
+      <!-- BLUE -->
+      <a-entity  id = "bttn1"
+        moodflower-bttn="sadness"
+        circles-button="button_color:rgb(24, 138, 243); button_color_hover:rgb(36, 155, 255);" 
+        position="0 0 3" rotation="0 0 0" scale="1 1 1"
+      ></a-entity>
+      <!-- RED -->
+      <a-entity id = "bttn2"
+        moodflower-bttn="anger"
+        circles-button="button_color:rgb(227, 37, 16); button_color_hover:rgb(245, 50, 30)" 
+        position="0 0 2" rotation="0 0 0" scale="1 1 1"
+      ></a-entity>
+      <!-- YELLOW -->
+      <a-entity id = "bttn3"
+        moodflower-bttn="happiness"
+        circles-button="button_color:rgb(255, 213, 5); button_color_hover:rgb(255, 230, 20);" 
+        position="0 0 1" rotation="0 0 0" scale="1 1 1"
+      ></a-entity>
+      <!-- PURPLE -->
+      <a-entity id = "bttn4"
+        moodflower-bttn="fearful"
+        circles-button="button_color:rgb(201, 84, 209); button_color_hover:rgb(225, 100, 230);" 
+        position="0 0 0" rotation="0 0 0" scale="1 1 1"
+      ></a-entity>
     </a-entity>
-    <!-- RED -->
-    <a-entity id = "bttn2"
-      moodflower-bttn="anger"
-      circles-button="button_color:rgb(227, 37, 16); button_color_hover:rgb(245, 50, 30)" 
-      position="5 0 3" 
-      rotation="0 0 0" 
-      scale="1 1 1">
-    </a-entity>
-    <!-- YELLOW -->
-    <a-entity id = "bttn3"
-      moodflower-bttn="happiness"
-      circles-button="button_color:rgb(255, 213, 5); button_color_hover:rgb(255, 230, 20);" 
-      position="5 0 2" 
-      rotation="0 0 0" 
-      scale="1 1 1">
-    </a-entity>
-    <!-- PURPLE -->
-    <a-entity id = "bttn4"
-      moodflower-bttn="fearful"
-      circles-button="button_color:rgb(201, 84, 209); button_color_hover:rgb(225, 100, 230);" 
-      position="5 0 1" 
-      rotation="0 0 0" 
-      scale="1 1 1">
-    </a-entity>
-
-    <!-- testing blocks-->
+    
+    <!-- testing blocks
     <a-entity id = "test1" class = "interactive" position = "1 0.5 3" moodflower-bttn geometry></a-entity>
     <a-entity id = "test2" class = "interactive"  position = "-1 0.5 3" solaris-moodflower geometry></a-entity>
-
+    -->
+    
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/>
 
