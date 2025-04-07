@@ -33,6 +33,8 @@ AFRAME.registerComponent('avatar-costume-manager', {
         const avatarNode    = avatar.querySelector('.user_' + 'head');//using "component search" we select the head component & everything underneath it
         const avatarFace    = avatarNode.querySelector('.user_' + 'face_express');//narrows component down to face (smiley image layer)
         
+        const soundBank     = [document.querySelector("#frogHead_sfx"), document.querySelector("#chickenHead_sfx")]
+
         const data = CONTEXT_AF.data;
         
         console.log(CIRCLES.SOLARIS_HEADS['frog']);//array of all of our heads
@@ -52,6 +54,10 @@ AFRAME.registerComponent('avatar-costume-manager', {
             avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//makes face invisible by changing face texture
             //if there would be an emit it would go here
 
+            //plays sound effect and resets all other sound effects so they can be played again
+            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"play"});
+            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"stop"});
+            soundBank[1].setAttribute("circles-sound", {src:"#chickenHead_sound", state:"stop"});
           
            model = 5;
 
@@ -59,10 +65,11 @@ AFRAME.registerComponent('avatar-costume-manager', {
         else if (itemType === "chicken"){//if item in the crypod is frog
             newHeadSrc = CIRCLES.SOLARIS_HEADS['chicken'];
             avatarNode.setAttribute("circles-color", {color:'white'});
-            avatarFace.setAttribute("visible", "false")
-            avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//makes face invisible
-            //here aswell
-
+            avatarFace.setAttribute("visible", "false")//makes face invisible
+            avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//here aswell
+            
+            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"stop"});
+            soundBank[1].setAttribute("circles-sound", {src:"#chickenHead_sound", state:"play"});
             
             model = 6;
         }

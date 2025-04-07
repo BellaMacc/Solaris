@@ -21,12 +21,15 @@ const CIRCLES_MIC_ENABLED     = 'REPLACE_CIRCLES_MIC_ENABLED_REPLACE';
 const AUTH_TOKEN_EXPIRATION_MINUTES = 15;
 
 //models
-const DEFAULT_GLTF_HEAD       = '/global/assets/models/gltf/head/Head_Circle.glb';
+//const DEFAULT_GLTF_HEAD       = '/global/assets/models/gltf/head/Head_Circle.glb';
 const DEFAULT_GLTF_HAIR       = '';
 const DEFAULT_GLTF_BODY       = '/global/assets/models/gltf/body/Body_Rectangle.glb';
 const DEFAULT_GLTF_HAND_LEFT  = '/global/assets/models/gltf/hands/left/Hand_Basic_L.glb';
 const DEFAULT_GLTF_HAND_RIGHT = '/global/assets/models/gltf/hands/right/Hand_Basic_R.glb';
 const DEFAULT_USER_BOUNDARY   = '/global/assets/models/gltf/User_Boundary.glb';
+
+//Solaris - modified - models
+const DEFAULT_GLTF_HEAD       = '/global/assets/models/gltf/solaris/heads/baseHead.glb'
 
 //textures
 const DEFAULT_ENV_MAP         = '/global/assets/textures/equirectangular/WhiteBlue.jpg';

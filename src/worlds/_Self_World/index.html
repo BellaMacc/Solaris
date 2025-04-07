@@ -32,6 +32,9 @@
         <a-asset-item  id = "self_music" src = "/worlds/_Self_World/assets/music/Self_Music.mp3" response-type="arraybuffer"></a-asset-item>
         <a-asset-item  id = "ambiance_effects" src = "/worlds/_Self_World/assets/music/ambiance.wav" response-type="arraybuffer"></a-asset-item>
 
+        <a-asset-ite   id = "frogHead_sound" src = "/worlds/_Self_World/assets/music/FrogSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-ite   id = "chickenHead_sound" src = "/worlds/_Self_World/assets/music/henSound.wav" response-type="arraybuffer"></a-asset-ite>
+
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
     
@@ -48,9 +51,12 @@
    
     <!--sounds-->
     <a-entity id="instruction_dialogue" position="-3.667 2.721 -7.566" circles-sound = "src:#sproot_dialogue; type:dialogue" ></a-entity>
-    <a-entity id="env_music" position = " 0 8 -11.130" circles-sound = "src:#self_music; autoplay:true; volume:0.4; loop:true; type: basic" ></a-entity>
-    <a-entity id="ambiance_music" position = " 0 5 -11.130" circles-sound = "src:#ambiance_effects; autoplay:true; volume:0.2; loop:true; type: ambience" ></a-entity>
-   
+    <a-entity id="env_music" position = " 0 8 -11.130" circles-sound = "src:#self_music; autoplay:false; volume:0.4; loop:true; type: basic" ></a-entity>
+    <a-entity id="ambiance_music" position = " 0 5 -11.130" circles-sound = "src:#ambiance_effects; autoplay:false; volume:0.2; loop:true; type: ambience" ></a-entity>
+    
+    <a-entity id="frogHead_sfx" position="0 0 0" circles-sound = "src:#frogHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="chickenHead_sfx" position="0 0 0" circles-sound = "src:#chickenHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+
     <!--env models-->
     <a-entity id="env_model" gltf-model="#env_gltf" visible='true'   shadow="receive:false; cast:false;"></a-entity>
     
