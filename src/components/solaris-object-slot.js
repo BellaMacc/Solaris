@@ -4,7 +4,7 @@
 
 AFRAME.registerComponent('solaris-object-slot', {
   schema: {
-    
+    heldItemId:         {type: "string", default:"EMPTY"},
     pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
     pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
     pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera
@@ -48,7 +48,7 @@ AFRAME.registerComponent('solaris-object-slot', {
       setUp();
     }
     else {//if circles is not set up wait for it to be
-      //setting up funtion to be called by event listener
+      //setting up cuntion to be called by event listener
       const readyFunc = function() {
         setUp();
         CIRCLES.getCirclesSceneElement().removeEventListener(CIRCLES.EVENTS.READY, readyFunc);
