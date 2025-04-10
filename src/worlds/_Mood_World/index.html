@@ -1,0 +1,42 @@
+<html>
+<head>
+ 
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+</head>
+<body>
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties>
+    <a-assets>
+      
+      <a-asset-item id="env_gltf" src="/worlds/_Mood_World/assets/models/moodFlowerEnv.glb" response-type="arraybuffer" ></a-asset-item>
+      <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+    </a-assets>
+
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+    <!--lights-->
+    <a-entity light="type:hemisphere; color:#e7e5cb; groundColor:#5d730c; intensity: 4.7" position = "0 10 -0.776"></a-entity>
+    <!--env models-->
+    <a-entity id="env_model" gltf-model="#env_gltf" visible='true'   shadow="receive:false; cast:false;"></a-entity>
+     <!--sky-->
+    <a-entity id="skySphere" scale=" 3 3 3">
+      <a-sky src = "#sky_map"></a-sky>
+    </a-entity>
+    <!--flower manager-->
+    <a-entity id = "flower-manager" solaris-flower-manager></a-entity>
+    <a-entity id = "flower-bttn-1" solaris-flower-bttn circles-button = "button_color: rgb(191, 191, 191); button_color_hover: rgb(97, 97, 97)" position = '-30.6 0.373 2.857' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'></a-entity>
+    <a-entity id = "flower-bttn-2" solaris-flower-bttn = "flowerColor: red" circles-button  position = '-30.6 0.352 3.249' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'>></a-entity>
+    <a-entity id = "flower-bttn-3" solaris-flower-bttn = "flowerColor: blue" circles-button = "button_color: rgb(85, 120, 201); button_color_hover: rgb(41, 67, 128)" position = '-30.6 0.354 3.605' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'>></a-entity>
+    <a-entity id = "flower-bttn-4" solaris-flower-bttn = "flowerColor: yellow" circles-button = "button_color: rgb(219, 184, 77); button_color_hover: rgb(173, 153, 23)" position = '-30.5 0.373 3.934' scale = "0.5 0.5 0.5"rotation = '0 5.7 -41'>></a-entity>
+  </a-scene>
+
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>

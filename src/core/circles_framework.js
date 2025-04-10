@@ -82,7 +82,22 @@ const SOLARIS_HEADS = {
   frog     : '/global/assets/models/gltf/solaris/heads/froghead.glb',
   chicken  :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
 }
+const SOLARIS_FLOWERS = {
+  red       :'/global/assets/models/gltf/solaris/flowers/redFlower.glb',
+  blue      :'/global/assets/models/gltf/solaris/flowers/blueFlower.glb',
+  yellow    : '/global/assets/models/gltf/solaris/flowers/yellowFlower.glb',
+  white     : '/global/assets/models/gltf/solaris/flowers/whiteFlower.glb',
+}
+const SOLARIS_BUTTONS = {
+  grey       :'/global/assets/models/gltf/solaris/misc/greyButton.glb',
 
+}
+const SOLARIS_FLOWER_ANIM = {
+  seed_stop      :'stillSeed',
+  seed_idle      :'idleSeed',
+  flower_play    : 'playFlower',
+  flower_idle    : 'flowerIdle',
+}
 
 const MODEL_HAIR_TYPE = {
   hair_0   : '/global/assets/models/gltf/hair/Hair_Curly.glb',
@@ -401,4 +416,7 @@ module.exports = {
   enableErrors,
   getVRPlatform,
   SOLARIS_HEADS,
+  SOLARIS_FLOWERS,
+  SOLARIS_FLOWER_ANIM,
+  SOLARIS_BUTTONS
 };
