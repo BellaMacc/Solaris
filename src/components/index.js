@@ -42,6 +42,7 @@ require('./solaris-object-slot.js');
 require('./solaris-pickup-object.js');
 require('./solaris-avatar-costume-manager.js');
 require('./solaris-moodFlower.js');
-require('./solaris-flower-manager.js'),
-require('./solaris-flower-bttn.js')
+require('./solaris-flower-manager.js');
+require('./solaris-flower-bttn.js');
+
 

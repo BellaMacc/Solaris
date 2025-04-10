@@ -88,6 +88,10 @@ const SOLARIS_FLOWERS = {
   yellow    : '/global/assets/models/gltf/solaris/flowers/yellowFlower.glb',
   white     : '/global/assets/models/gltf/solaris/flowers/whiteFlower.glb',
 }
+const SOLARIS_BUTTONS = {
+  grey       :'/global/assets/models/gltf/solaris/misc/greyButton.glb',
+
+}
 const SOLARIS_FLOWER_ANIM = {
   seed_stop      :'stillSeed',
   seed_idle      :'idleSeed',
@@ -414,4 +418,5 @@ module.exports = {
   SOLARIS_HEADS,
   SOLARIS_FLOWERS,
   SOLARIS_FLOWER_ANIM,
+  SOLARIS_BUTTONS
 };
