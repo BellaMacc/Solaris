@@ -2,7 +2,7 @@
 
 AFRAME.registerComponent('solaris-pickup-object', {
   schema: {
-    itemType:           {type: "string", default:'NONE', oneOf:['NONE', 'frog', 'chicken']},
+    itemType:           {type: "string", default:'NONE', oneOf:['NONE', 'frog', 'chicken', 'apple', 'cow', 'robot']},
     pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
     pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
     pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera

@@ -33,14 +33,31 @@ AFRAME.registerComponent('avatar-costume-manager', {
         const avatarNode    = avatar.querySelector('.user_' + 'head');//using "component search" we select the head component & everything underneath it
         const avatarFace    = avatarNode.querySelector('.user_' + 'face_express');//narrows component down to face (smiley image layer)
         
-        const soundBank     = [document.querySelector("#frogHead_sfx"), document.querySelector("#chickenHead_sfx")]
+        const soundBank     = [ document.querySelector("#frogHead_sfx"),
+                                document.querySelector("#chickenHead_sfx"),
+                                document.querySelector("#appleHead_sfx"),
+                                document.querySelector("#cowHead_sfx"),
+                                document.querySelector("#robotHead_sfx"),]
 
         const data = CONTEXT_AF.data;
-        
-        console.log(CIRCLES.SOLARIS_HEADS['frog']);//array of all of our heads
-        console.log(avatarNode);
-        console.log(avatarFace);
 
+        //"headname", number of the head in its array
+        function headSwap(headName, modelNum) {
+            newHeadSrc = CIRCLES.SOLARIS_HEADS[headName];
+            avatarNode.setAttribute("circles-color", {color:'white'});
+            avatarFace.setAttribute("visible", "false")//makes face invisible by making the plane that the texture lies on invisible
+            avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//makes face invisible by changing face texture
+            //if there would be an emit it would go here
+
+            //plays sound effect and resets all other sound effects so they can be played again
+            for (let i = 0; i < soundBank.length; i++){
+                soundBank[i].setAttribute("circles-sound", {state:"stop"});
+            }
+
+            //5 is the number of other heads that are in the base circles - if those heads get removed, this number needs to change accordingly 
+            soundBank[modelNum - 5].setAttribute("circles-sound", {state:"play"});
+            model = modelNum;
+        }
 
         console.log("Head Changing Received");
 
@@ -48,30 +65,19 @@ AFRAME.registerComponent('avatar-costume-manager', {
         let newHeadSrc = CIRCLES.DEFAULT_GLTF_HEAD;
         let model = 0;
         if (itemType === "frog"){//if item in the crypod is frog
-            newHeadSrc = CIRCLES.SOLARIS_HEADS['frog'];
-            avatarNode.setAttribute("circles-color", {color:'white'});
-            avatarFace.setAttribute("visible", "false")//makes face invisible by making the plane that the texture lies on invisible
-            avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//makes face invisible by changing face texture
-            //if there would be an emit it would go here
-
-            //plays sound effect and resets all other sound effects so they can be played again
-            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"play"});
-            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"stop"});
-            soundBank[1].setAttribute("circles-sound", {src:"#chickenHead_sound", state:"stop"});
-          
-           model = 5;
-
+            headSwap("frog", 5)
         }
         else if (itemType === "chicken"){//if item in the crypod is frog
-            newHeadSrc = CIRCLES.SOLARIS_HEADS['chicken'];
-            avatarNode.setAttribute("circles-color", {color:'white'});
-            avatarFace.setAttribute("visible", "false")//makes face invisible
-            avatarFace.setAttribute("material", { src: CIRCLES.CONSTANTS.SOLARIS_FACE_NONE})//here aswell
-            
-            soundBank[0].setAttribute("circles-sound", {src:"#frogHead_sound", state:"stop"});
-            soundBank[1].setAttribute("circles-sound", {src:"#chickenHead_sound", state:"play"});
-            
-            model = 6;
+            headSwap("chicken", 6)
+        }
+        else if (itemType === "apple"){//if item in the crypod is frog
+            headSwap("apple", 7)
+        }
+        else if (itemType === "cow"){//if item in the crypod is frog
+            headSwap("cow", 8)
+        }
+        else if (itemType === "robot"){//if item in the crypod is frog
+            headSwap("robot", 9)
         }
         else{
             console.log("Head did not change item type not found");
@@ -82,17 +88,11 @@ AFRAME.registerComponent('avatar-costume-manager', {
         if (window.newURLSearchParams.has('head')){
             window.newURLSearchParams.set('head', model);//head=model#
             window.newURLSearchParams.set('head'+ '_col',{color:'white'});//head_col
-
-            window.newURLSearchParams.set('face', "invisible");//
-
-
         }
         else{
 
             window.newURLSearchParams.append('head', model);
             window.newURLSearchParams.append('head'+ '_col',{color:'white'});
-            window.newURLSearchParams.append('face', "invisible");//
-
         }
 
     },
@@ -100,18 +100,17 @@ AFRAME.registerComponent('avatar-costume-manager', {
         const avatar        = document.querySelector('#' + CIRCLES.CONSTANTS.PRIMARY_USER_ID);
         const avatarNode    = avatar.querySelector('.user_' + 'body');
         console.log("Body Changing");
-
         avatarNode.setAttribute("gltf-model", modelPath);
 
     },
     receiveChangeRequest: function(info){
         const CONTEXT_AF = this;
-
+        console.log("Fired");
         const itemType = info;
 
         CONTEXT_AF.changeHead(itemType);
-
     },
+    
 
 });
 

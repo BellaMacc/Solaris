@@ -73,14 +73,23 @@ const MODEL_HEAD_TYPE = {
   head_2   : '/global/assets/models/gltf/head/Head_Oval.glb',
   head_3   : '/global/assets/models/gltf/head/Head_Square.glb',
   head_4   : '/global/assets/models/gltf/head/Head_Thin.glb',
+
+  //solaris heads
   head_5   : '/global/assets/models/gltf/solaris/heads/froghead.glb',
   head_6   :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+  head_7   : '/global/assets/models/gltf/solaris/heads/appleHead.glb',
+  head_8   : '/global/assets/models/gltf/solaris/heads/cowHead.glb',
+  head_9   : '/global/assets/models/gltf/solaris/heads/robotHead.glb',
+
 };
 
 //solaris models
 const SOLARIS_HEADS = {
-  frog     : '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  frog     :  '/global/assets/models/gltf/solaris/heads/froghead.glb',
   chicken  :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+  apple    :  '/global/assets/models/gltf/solaris/heads/appleHead.glb',
+  cow      :  '/global/assets/models/gltf/solaris/heads/cowHead.glb',
+  robot    :  '/global/assets/models/gltf/solaris/heads/robotHead.glb',
 }
 
 
