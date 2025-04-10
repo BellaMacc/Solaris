@@ -19,7 +19,7 @@ AFRAME.registerComponent('solaris-flower-bttn', {
         };
         //start listenting for click
         CONTEXT_AF.el.addEventListener('click',onClicked)
-        CONTEXT_AF.el.addEventListener('flower-bttn-pressed', function(){
+        CONTEXT_AF.el.sceneEl.addEventListener('flower-bttn-pressed', function(){
             CONTEXT_AF.isInteractable = false;
         })
        
