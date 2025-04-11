@@ -37,7 +37,7 @@ AFRAME.registerComponent('avatar-costume-manager', {
                                 document.querySelector("#chickenHead_sfx"),
                                 document.querySelector("#appleHead_sfx"),
                                 document.querySelector("#cowHead_sfx"),
-                                document.querySelector("#robotHead_sfx"),]
+                                document.querySelector("#robotHead_sfx")];
 
         const data = CONTEXT_AF.data;
 
@@ -53,7 +53,6 @@ AFRAME.registerComponent('avatar-costume-manager', {
             for (let i = 0; i < soundBank.length; i++){
                 soundBank[i].setAttribute("circles-sound", {state:"stop"});
             }
-
             //5 is the number of other heads that are in the base circles - if those heads get removed, this number needs to change accordingly 
             soundBank[modelNum - 5].setAttribute("circles-sound", {state:"play"});
             model = modelNum;
@@ -79,8 +78,9 @@ AFRAME.registerComponent('avatar-costume-manager', {
         else if (itemType === "robot"){//if item in the crypod is frog
             headSwap("robot", 9)
         }
-        else{
-            console.log("Head did not change item type not found");
+        console.log("This is the model : "+model + "");
+        if (model === 0){
+            console.log("model be 000000000");
         }
         avatarNode.setAttribute("gltf-model", newHeadSrc);//if a new head was chosen then a change is made to the gltf pointer
 

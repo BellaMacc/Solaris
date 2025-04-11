@@ -3,6 +3,7 @@
   
   <!-- Circles' head scripts [REQUIRED] -->
   <circles-start-scripts/>
+
   <script src = '/worlds/_Mood_World/scripts/flower-dialogue.js'></script>
 </head>
 <body>
@@ -61,8 +62,17 @@
       <a-entity id = "flower-bttn-3" solaris-flower-bttn = "flowerColor: blue" circles-button = "button_color: rgb(85, 120, 201); pedastal_color: rgb(133, 154, 130); button_color_hover: rgb(41, 67, 128)" position = '0 0.373 1.605' scale = "0.5 0.5 0.5" rotation = '0 0 0'>></a-entity>
       <a-entity id = "flower-bttn-4" solaris-flower-bttn = "flowerColor: yellow" circles-button = "button_color: rgb(219, 184, 77); pedastal_color: rgb(133, 154, 130); button_color_hover: rgb(173, 153, 23)" position = '0 0.373 1.934' scale = "0.5 0.5 0.5" rotation = '0 0 0'>></a-entity>
     </a-entity>
+     <!--sproot-->
+     <a-entity id="instruction_dialogue" position="5.66193 1.187 -7.836" circles-sound = "src:#sproot_dialogue; type:dialogue" ></a-entity>
+     <a-entity id="sproot_model" gltf-model="#sproot_gltf" position="5.66193 1.187 -7.836" animation-mixer="clip: Sproot_Idle" rotation="0 -90 0"></a-entity>
+     <a-box id="sproot_collider" class="interactive" cirlces-interactive-object position="5.76155 3.14207 -7.836" visible="false" onclick-sproot="modelID: #sproot_model; dialogueID: #instruction_dialogue" material="" scale="1.8 2.98 1"></a-box>
     
+     <!--pudge dialogue-->
+     <a-entity id="pudge_model" gltf-model="#pudge_gltf" position="-32.23337 -0.456 1.65485"  rotation="0 -17.39 0"></a-entity>
+     <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; type:dialogue" ></a-entity>
+
      <!--Sounds Effects-->
+     
     <a-entity id="birds1_sfx" position="      -8      1    -16" circles-sound = "src:#birdsFx1; volume:0.8; autoplay:true; type: foley; loop:true"></a-entity>
     <a-entity id="birds2_sfx" position=" -10.924  5.934 17.335" circles-sound = "src:#birdsFx2; autoplay:true; type: foley; loop:true"></a-entity>
     <a-entity id="roboHum_sfx" position="     -8      1    -16" circles-sound = "src:#compFx; volume:0.4; autoplay:true; type: foley; loop:true"></a-entity>
@@ -70,16 +80,8 @@
     
     <a-entity id="compHum_sfx" position="-31.066 -0.292    3.5" circles-sound = "src:#compFx; volume:0.4; autoplay:true; type: foley; loop:true"></a-entity>
     <a-entity id="moodActive_sfx" position="-31.066 -0.292 3.5" circles-sound = "src:#moodActiveFx; volume:0.5; autoplay:false; type: foley; loop:false"></a-entity>
-     
-    <!--sproot-->
-     <a-entity id="instruction_dialogue" position="5.66193 1.187 -7.836" circles-sound = "src:#sproot_dialogue; type:dialogue" ></a-entity>
-     <a-entity id="sproot_model" gltf-model="#sproot_gltf" position="5.66193 1.187 -7.836" animation-mixer="clip: Sproot_Idle" rotation="0 -90 0"></a-entity>
-     <a-box id="sproot_collider" class="interactive" cirlces-interactive-object position="5.76155 3.14207 -7.836" visible="false" onclick-sproot="modelID: #sproot_model; dialogueID: #instruction_dialogue" material="" scale="1.8 2.98 1"></a-box>
-    
-     <!--pudge dialogue-->
-     <a-entity id="pudge_model" gltf-model="#pudge_gltf" position="-32.23337 -0.456 1.65485"  rotation="0 -17.39 0"></a-entity>
-     <a-entity id="flwr_dialogue"  position="-30.600 1 3.075" circles-sound = "src:#sproot_dialogue2; volume:1; type:narration" ></a-entity>
-    <a-entity flower-dialogue = "dialogueID:#flwr_dialogue"></a-entity>
+
+    <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; volume:1.5; type:dialogue" ></a-entity>
     <!--other npcs-->
     <a-entity id="pongo_model" gltf-model="#pongo_gltf" position="-11.50273 0 -12.43619"  rotation="0 -90 0" scale = "0.2 0.2 0.2"></a-entity>
     <a-entity id="karat_model" gltf-model="#karat_gltf" position="-10.67968 0 5.56223" rotation="0 180 0" scale="0.5 0.5 0.5"></a-entity>
