@@ -12,11 +12,15 @@ AFRAME.registerComponent('flower-dialogue', {
         CONTEXT_AF.dialogueID = data.dialogueID;
         let dialogue = document.querySelector(CONTEXT_AF.dialogueID);
         CONTEXT_AF.el.sceneEl.addEventListener('flower-bttn-pressed', function(){
-           
-           
-            setTimeout(function(){
-            dialogue.setAttribute('circles-sound', {state: 'play'});
-           }, 2000)
+        //button is being pressed
+        let computerHum =    document.querySelector("#compHum_sfx");
+        let moodActive  = document.querySelector("#moodActive_sfx");
+
+        computerHum.setAttribute('circles-sound', {state: 'stop'});
+        moodActive.setAttribute('circles-sound', {state: 'play'});
+           setTimeout(function(){
+               dialogue.setAttribute('circles-sound', {state: 'play'});
+           }, 3000)
         })
     },
     

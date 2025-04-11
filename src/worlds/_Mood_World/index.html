@@ -26,7 +26,15 @@
       <!--Sounds-->
       <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Mood_World/assets/music/Sproot2.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item  id = "sproot_dialogue2" src = "/worlds/_Mood_World/assets/music/Sproot3.mp3" response-type="arraybuffer"></a-asset-item>
-
+      
+      <!--Sounds Effects-->
+      <a-asset-item  id = "birdsFx1" src = "/worlds/_Mood_World/assets/env_sfx/birdsChirping1.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item  id = "birdsFx2" src = "/worlds/_Mood_World/assets/env_sfx/birdsChirping2.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item  id = "compFx" src = "/worlds/_Mood_World/assets/env_sfx/computerDefault.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item  id = "moodActiveFx" src = "/worlds/_Mood_World/assets/env_sfx/moodDetector_Activated.mp3" response-type="arraybuffer"></a-asset-item>
+      <a-asset-item  id = "towerFx" src = "/worlds/_Mood_World/assets/env_sfx/towerSounds.mp3" response-type="arraybuffer"></a-asset-item>
+      
+      <!-- MUSIC -->
       <a-asset-item  id = "mood_music" src = "/worlds/_Mood_World/assets/music/moodWorld.mp3" response-type="arraybuffer"></a-asset-item>
       
       <!-- Circles' built-in assets [REQUIRED] -->
@@ -48,11 +56,12 @@
 
     <!--flower manager-->
     <a-entity id = "flower-manager" solaris-flower-manager></a-entity>
-    <a-entity id = "flower-bttn-1" solaris-flower-bttn circles-button = "button_color: rgb(191, 191, 191); button_color_hover: rgb(97, 97, 97)" position = '-30.6 0.373 2.857' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'></a-entity>
-    <a-entity id = "flower-bttn-2" solaris-flower-bttn = "flowerColor: red" circles-button  position = '-30.6 0.352 3.249' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'>></a-entity>
-    <a-entity id = "flower-bttn-3" solaris-flower-bttn = "flowerColor: blue" circles-button = "button_color: rgb(85, 120, 201); button_color_hover: rgb(41, 67, 128)" position = '-30.6 0.354 3.605' scale = "0.5 0.5 0.5" rotation = '0 5.7 -41'>></a-entity>
-    <a-entity id = "flower-bttn-4" solaris-flower-bttn = "flowerColor: yellow" circles-button = "button_color: rgb(219, 184, 77); button_color_hover: rgb(173, 153, 23)" position = '-30.5 0.373 3.934' scale = "0.5 0.5 0.5"rotation = '0 5.7 -41'>></a-entity>
-    
+    <a-entity id = "button-grp" position = '-30.910 0.114 2.050' scale = "1 1 1" rotation = '0 5.7 -41'>
+      <a-entity id = "flower-bttn-1" solaris-flower-bttn circles-button = "button_color: rgb(191, 191, 191); pedastal_color: rgb(133, 154, 130) button_color_hover: rgb(97, 97, 97)" position = '0 0.373 0.857' scale = "0.5 0.5 0.5" rotation = '0 0 0'></a-entity>
+      <a-entity id = "flower-bttn-2" solaris-flower-bttn = "flowerColor: red" circles-button ="pedastal_color: rgb(133, 154, 130);" position = '0 0.373 1.249' scale = "0.5 0.5 0.5" rotation = '0 0 0'>></a-entity>
+      <a-entity id = "flower-bttn-3" solaris-flower-bttn = "flowerColor: blue" circles-button = "button_color: rgb(85, 120, 201); pedastal_color: rgb(133, 154, 130); button_color_hover: rgb(41, 67, 128)" position = '0 0.373 1.605' scale = "0.5 0.5 0.5" rotation = '0 0 0'>></a-entity>
+      <a-entity id = "flower-bttn-4" solaris-flower-bttn = "flowerColor: yellow" circles-button = "button_color: rgb(219, 184, 77); pedastal_color: rgb(133, 154, 130); button_color_hover: rgb(173, 153, 23)" position = '0 0.373 1.934' scale = "0.5 0.5 0.5" rotation = '0 0 0'>></a-entity>
+    </a-entity>
      <!--sproot-->
      <a-entity id="instruction_dialogue" position="5.66193 1.187 -7.836" circles-sound = "src:#sproot_dialogue; type:dialogue" ></a-entity>
      <a-entity id="sproot_model" gltf-model="#sproot_gltf" position="5.66193 1.187 -7.836" animation-mixer="clip: Sproot_Idle" rotation="0 -90 0"></a-entity>
@@ -60,11 +69,20 @@
     
      <!--pudge dialogue-->
      <a-entity id="pudge_model" gltf-model="#pudge_gltf" position="-32.23337 -0.456 1.65485"  rotation="0 -17.39 0"></a-entity>
-     <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; volume:1.5; type:dialogue" ></a-entity>
-    <a-entity flower-dialogue = "dialogueID:#flwr_dialogue"></a-entity>
-    
-    <!--other npcs-->
+     <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; type:dialogue" ></a-entity>
 
+     <!--Sounds Effects-->
+     
+    <a-entity id="birds1_sfx" position="      -8      1    -16" circles-sound = "src:#birdsFx1; volume:0.8; autoplay:true; type: foley; loop:true"></a-entity>
+    <a-entity id="birds2_sfx" position=" -10.924  5.934 17.335" circles-sound = "src:#birdsFx2; autoplay:true; type: foley; loop:true"></a-entity>
+    <a-entity id="roboHum_sfx" position="     -8      1    -16" circles-sound = "src:#compFx; volume:0.3; autoplay:true; type: foley; loop:true"></a-entity>
+    <a-entity id="tower_sfx"  position="     -35      6    5.5" circles-sound = "src:#towerFx; volume:0.4; autoplay:true; type: foley; loop:true"></a-entity>
+    
+    <a-entity id="compHum_sfx" position="-31.066 -0.292    3.5" circles-sound = "src:#compFx; volume:0.25; autoplay:true; type: foley; loop:true"></a-entity>
+    <a-entity id="moodActive_sfx" position="-31.066 -0.292 3.5" circles-sound = "src:#moodActiveFx; volume:0.5; autoplay:false; type: foley; loop:false"></a-entity>
+
+     <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; volume:1.5; type:dialogue" ></a-entity>
+    <!--other npcs-->
     <a-entity id="pongo_model" gltf-model="#pongo_gltf" position="-11.50273 0 -12.43619"  rotation="0 -90 0" scale = "0.2 0.2 0.2"></a-entity>
     <a-entity id="karat_model" gltf-model="#karat_gltf" position="-10.67968 0 5.56223" rotation="0 180 0" scale="0.5 0.5 0.5"></a-entity>
     <!--portal-->
@@ -81,7 +99,6 @@
       <a-entity geometry="primitive:plane; width:1.6; height:2.0" circles-platform-mirror="textureSizeDesktop:1024; textureSizeMobile:1024; textureSizeHMD:512;"></a-entity>
     </a-entity>
 
-<<<<<<< Updated upstream
     <a-entity circles-checkpoint position="5.313 0.359 -4.660"></a-entity>
     <a-entity circles-checkpoint position="6.546 0.359 -9.982"></a-entity>
     <a-entity circles-checkpoint position="7.973 0.540 -13.28"></a-entity>
@@ -89,8 +106,6 @@
     <a-entity circles-checkpoint position="-14.8 0.0 1.771"></a-entity>
     <a-entity circles-checkpoint position="-24.8 -0.456 2.170"></a-entity>
     <a-entity circles-checkpoint position="-28.1 -0.19 4.443"></a-entity> 
-=======
->>>>>>> Stashed changes
   </a-scene>
 
   <!-- Circles' end scripts [REQUIRED] -->
