@@ -23,21 +23,27 @@
         <a-asset-item id="sproot_gltf" src= '/global/assets/models/gltf/solaris/misc/sproot.glb' response-type="arraybuffer" ></a-asset-item>
        
         <!--Objects-->
-
-       
+     
+          <a-asset-item  id = "apple_gltf" src = "/worlds/_Self_World/assets/models/objects/apple.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "chicken_gltf" src = "/worlds/_Self_World/assets/models/objects/chicken.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "frog_gltf" src = "/worlds/_Self_World/assets/models/objects/frog.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "gear_gltf" src = "/worlds/_Self_World/assets/models/objects/gear.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "cow_gltf" src = "/worlds/_Self_World/assets/models/objects/cow.glb" response-type="arraybuffer"></a-asset-item>
+          
         <!--Images-->
         <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
 
         <!--Sound-->
+          <!--Dialogue-->
         <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Self_World/assets/music/SprootDialogue.mp3" response-type="arraybuffer"></a-asset-item>
+          <!--Music-->
         <a-asset-item  id = "self_music" src = "/worlds/_Self_World/assets/music/Self_Music.mp3" response-type="arraybuffer"></a-asset-item>
-        <a-asset-item  id = "ambiance_effects" src = "/worlds/_Self_World/sassets/music/ambiance.wav" response-type="arraybuffer"></a-asset-item>
-
-        <a-asset-ite   id = "frogHead_sound" src = "/worlds/_Self_World/assets/music/FrogSound.wav" response-type="arraybuffer"></a-asset-ite>
-        <a-asset-ite   id = "chickenHead_sound" src = "/worlds/_Self_World/assets/music/henSound.wav" response-type="arraybuffer"></a-asset-ite>
-        <a-asset-ite   id = "appleHead_sound" src = "/worlds/_Self_World/assets/music/appleSound.wav" response-type="arraybuffer"></a-asset-ite>
-        <a-asset-ite   id = "cowHead_sound" src = "/worlds/_Self_World/assets/music/cowSound.wav" response-type="arraybuffer"></a-asset-ite>
-        <a-asset-ite   id = "robotHead_sound" src = "/worlds/_Self_World/assets/music/robotSound.wav" response-type="arraybuffer"></a-asset-ite>
+          <!--Effects-->
+        <a-asset-item   id = "frogHead_sound" src = "/worlds/_Self_World/assets/music/FrogSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "chickenHead_sound" src = "/worlds/_Self_World/assets/music/henSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "appleHead_sound" src = "/worlds/_Self_World/assets/music/appleSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "cowHead_sound" src = "/worlds/_Self_World/assets/music/cowSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "robotHead_sound" src = "/worlds/_Self_World/assets/music/robotSound.wav" response-type="arraybuffer"></a-asset-ite>
 
 
       <!-- Circles' built-in assets [REQUIRED] -->
@@ -76,28 +82,43 @@
     <a-box  id = "sproot_collider"  class = "interactive" position = "-4.702 2.460 -7.749" visible = "false"  geometry onclick-sproot = "modelID:#sproot_model; dialogueID:#instruction_dialogue"></a-box>
 
     <!--Pick Up Objects-->
-    <a-entity id = "item1" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object = "itemType:frog"></a-entity>
-    <a-entity id = "item2" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object = "itemType:chicken"></a-entity>
-    <a-entity id = "item3" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#fc0f03" solaris-pickup-object = "itemType:apple"></a-entity>
-    <a-entity id = "item4" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#ffffff" solaris-pickup-object = "itemType:cow"></a-entity>
-    <a-entity id = "item5" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#b5b5b5" solaris-pickup-object = "itemType:robot"></a-entity>
+    <a-entity id = "item1"  gltf-model ="#frog_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:frog"></a-entity>
+    <a-entity id = "item2" gltf-model ="#chicken_gltf" position="1 0.5 3" rotation="0 45 0"  solaris-pickup-object = "itemType:chicken"></a-entity>
+    <a-entity id = "item3" gltf-model ="#apple_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:apple"></a-entity>
+    <a-entity id = "item4" gltf-model ="#cow_gltf" position="1 0.5 3" rotation="0 45 0"solaris-pickup-object = "itemType:cow"></a-entity>
+    <a-entity id = "item5" gltf-model ="#gear_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:robot"></a-entity>
 
     <!--Object Slots-->
       <!--special slot-->
     <a-entity id = "slot1" class = "interactive"  position="-3.631 3.054 -15.350" solaris-object-slot> </a-entity>
       <!--not special slot-->
-    <a-entity id = "slot2" class = "interactive" position="6.099 1.356 -16.116" solaris-object-slot = "heldItemId:item1"> </a-entity>
-    <a-entity id = "slot3" class = "interactive"  position = "3.219 1.356 -16.359" solaris-object-slot = "heldItemId:item2"> </a-entity>
-    <a-entity id = "slot3" class = "interactive"  position = "0.219 1.356 -16.359" solaris-object-slot = "heldItemId:item3"> </a-entity>
-    <a-entity id = "slot3" class = "interactive"  position = "-3.219 1.356 -16.359" solaris-object-slot = "heldItemId:item4"> </a-entity>
-    <a-entity id = "slot3" class = "interactive"  position = "-6.219 1.356 -16.359" solaris-object-slot = "heldItemId:item5"> </a-entity>
+    <a-entity id = "slot2" class = "interactive" position="5.0456 1.356 -10.65" rotation="0 43.5476 0" solaris-object-slot = "heldItemId:item1"> </a-entity>
+    <a-entity id = "slot3" class = "interactive"  position="8.1413 0.4 -3.57324"  rotation="0 4.45 0" solaris-object-slot = "heldItemId:item2"> </a-entity>
+    <a-entity id = "slot4" class = "interactive"  position="-11.52954 0.4 -16.42" rotation="0 -44.835 0" solaris-object-slot = "heldItemId:item3"> </a-entity>
+    <a-entity id = "slot5" class = "interactive"  position = "-10.1 0.4 -0.902" roation = "0 -118.498 0" solaris-object-slot = "heldItemId:item4"> </a-entity>
+    <a-entity id = "slot6" class = "interactive"  position = "-1.136 1.356 -16.359" solaris-object-slot = "heldItemId:item5"> </a-entity>
+    <a-entity id = "slot7" class = "interactive"  position = "5.0456 1.356 -16.359" solaris-object-slot > </a-entity>
     <!--Interactive Objects-->
     <a-entity class = "interactive" position = "-0.15 2.77 -16.67" circles-button solaris-costume-button> </a-entity>
     
     <!--NAVMESH-->
     <a-entity id="navmesh" gltf-model="#nav_gltf" visible='false' nav-mesh></a-entity>
       
-      
+    <!--Portals-->
+    <a-entity circles-checkpoint circles-spawnpoint position="0.108 0.05 2.826"></a-entity>
+
+    <a-entity circles-checkpoint position="0.108 0.05 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="0.108 0.746 -8.301"></a-entity>
+    <a-entity circles-checkpoint position="-2.93 0.746 -7.768"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.746 -12.25"></a-entity>
+    <a-entity circles-checkpoint position="1.584 0.746 -14.02"></a-entity>
+    <a-entity circles-checkpoint position="3.692 0.746 -12.14"></a-entity>
+    <a-entity circles-checkpoint position="6.471 0.746 -8.434"></a-entity>
+    <a-entity circles-checkpoint position="5.727 0.746 -12.24"></a-entity>
+    <a-entity circles-checkpoint position="4.831 0.050 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="-6.40 0.050 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="-12.40 0.050 -7.851"></a-entity>
+    <a-entity circles-checkpoint position="-12.40 0.050 -13.28"></a-entity>
     <!------------------------------------------------------------------------------------------------------------------------->
      
     <!--Mirror-->
