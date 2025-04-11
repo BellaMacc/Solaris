@@ -58,7 +58,13 @@
      <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; type:dialogue" ></a-entity>
     <a-entity flower-dialogue = "dialogueID:#flwr_dialogue"></a-entity>
 
-    <!--portal-->
+    <!-- flower dates -->
+    <a-entity id="date1" position="-12.379 0.850 -4.961" rotation="0 0 0" text="value:2025-04-8; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+    <a-entity id="date2" position="-8.078 1 -7.800" rotation="0 0 0" text="value:2025-04-7; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+    <a-entity id="date3" position="2.527 1.103 -11.052" rotation="0 0 0" text="value:2025-04-9; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+    <a-entity id="date4" position="-11.219 1 5.222" rotation="0 180 0" text="value:2025-04-9; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+    <a-entity id="date5" position="-25.560 0.330 -4.037" rotation="0 0 0" text="value:2025-04-8; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+<!--portal-->
     <a-entity  id = "hub_portal" roation = " 0 -90 0" position="5 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
     <!------------------------------------------------------------------------------------------------------------------------->
      
@@ -71,7 +77,6 @@
       <a-entity class="mirror_back" position="0.0 0.0 -0.01" rotation="0 180 0"  geometry="primitive:plane; width:1.6; height:2.0;" material="color:rgb(100, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
       <a-entity geometry="primitive:plane; width:1.6; height:2.0" circles-platform-mirror="textureSizeDesktop:1024; textureSizeMobile:1024; textureSizeHMD:512;"></a-entity>
     </a-entity>
-
   </a-scene>
 
   <!-- Circles' end scripts [REQUIRED] -->
