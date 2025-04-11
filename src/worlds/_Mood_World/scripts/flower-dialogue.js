@@ -6,6 +6,7 @@ AFRAME.registerComponent('flower-dialogue', {
         dialogueID: {type: 'string', default:'#dialogue'},
     },
     init: function(){
+        console.log("this exists");
         const CONTEXT_AF = this;
         const data = CONTEXT_AF.data;
 
@@ -13,11 +14,10 @@ AFRAME.registerComponent('flower-dialogue', {
         let dialogue = document.querySelector(CONTEXT_AF.dialogueID);
         CONTEXT_AF.el.sceneEl.addEventListener('flower-bttn-pressed', function(){
         //button is being pressed
-        let computerHum =    document.querySelector("#compHum_sfx");
-        let moodActive  = document.querySelector("#moodActive_sfx");
-
-        computerHum.setAttribute('circles-sound', {state: 'stop'});
-        moodActive.setAttribute('circles-sound', {state: 'play'});
+        //let computerHum =    document.querySelector("#compHum_sfx");
+        //let moodActive  = document.querySelector("#moodActive_sfx");
+        //computerHum.setAttribute('circles-sound', {state: 'stop'});
+        //moodActive.setAttribute('circles-sound', {state: 'play'});
            setTimeout(function(){
                dialogue.setAttribute('circles-sound', {state: 'play'});
            }, 3000)
