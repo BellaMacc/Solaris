@@ -36,3 +36,13 @@ require('./circles-spawnpoint');
 require('./circles-sphere-env-map.js');
 require('./circles-user-networked');
 require('./circles-enter-ui');
+require('./mat-user-device.js');
+require('./sproot-dialogue.js');
+require('./solaris-object-slot.js');
+require('./solaris-pickup-object.js');
+require('./solaris-avatar-costume-manager.js');
+require('./solaris-moodFlower.js');
+require('./solaris-flower-manager.js');
+require('./solaris-flower-bttn.js');
+
+

@@ -1,0 +1,154 @@
+<html>
+<head>
+  
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+
+  <!--Our Scripts-->
+  <script src="/worlds/_Self_World/scripts/solaris-constume-button.js"></script>
+  
+</head>
+<body>
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties avatar-costume-manager>
+    <a-assets timeout = "10000">
+        <!--OurLoaded in Assets-->
+        <!--Env-->
+        <a-asset-item id="env_gltf" src="/worlds/_Self_World/assets/models/environment/self_world_env.glb" response-type="arraybuffer" ></a-asset-item>
+        <a-asset-item id="nav_gltf" src="/worlds/_Self_World/assets/models/environment/self_world_navMesh.glb" response-type="arraybuffer" ></a-asset-item>
+        <!--NPCs-->
+        <a-asset-item id="sproot_gltf" src= '/global/assets/models/gltf/solaris/misc/sproot.glb' response-type="arraybuffer" ></a-asset-item>
+       
+        <!--Objects-->
+     
+          <a-asset-item  id = "apple_gltf" src = "/worlds/_Self_World/assets/models/objects/apple.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "chicken_gltf" src = "/worlds/_Self_World/assets/models/objects/chicken.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "frog_gltf" src = "/worlds/_Self_World/assets/models/objects/frog.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "gear_gltf" src = "/worlds/_Self_World/assets/models/objects/gear.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "cow_gltf" src = "/worlds/_Self_World/assets/models/objects/cow.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id = "paper_model0" src = "/worlds/_b_SelfWorld/assets/models/papers/papers1.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id = "paper_model1" src = "/worlds/_b_SelfWorld/assets/models/papers/papers2.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id = "paper_model2" src = "/worlds/_b_SelfWorld/assets/models/papers/papers3.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id="pedestal_gltf" src="/worlds/_Self_World/assets/models/environment/pedestal.glb" response-type="arraybuffer" ></a-asset-item>
+        <!--Images-->
+        <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
+
+        <!--Sound-->
+          <!--Dialogue-->
+        <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Self_World/assets/music/SprootDialogue.mp3" response-type="arraybuffer"></a-asset-item>
+          <!--Music-->
+        <a-asset-item  id = "self_music" src = "/worlds/_Self_World/assets/music/Self_Music.mp3" response-type="arraybuffer"></a-asset-item>
+          <!--Effects-->
+        <a-asset-item   id = "frogHead_sound" src = "/worlds/_Self_World/assets/music/FrogSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "chickenHead_sound" src = "/worlds/_Self_World/assets/music/henSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "appleHead_sound" src = "/worlds/_Self_World/assets/music/appleSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "cowHead_sound" src = "/worlds/_Self_World/assets/music/cowSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "robotHead_sound" src = "/worlds/_Self_World/assets/music/robotSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "noItem_sound" src = "/worlds/_Self_World/assets/music/noItemSound.mp3" response-type="arraybuffer"></a-asset-ite>
+
+
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+    
+    </a-assets> <!---------------------------------------------------------------------------------------------------------->
+    
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+    <!--portal-->
+    <a-entity  id = "hub_portal" rotation = " 0 90 0" position="0 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:/worlds/_b_LandingHub/assets/images/hub_world.jpg; title_text:Hub; link_url:/w/_b_LandingHub" ></a-entity>
+    <!--light-->
+    <!--<a-entity light="type:point; color:#e1c2a8; groundColor:#499763; intensity: 22" position = "3.994 6.292 -5.825"></a-entity>--> 
+    <a-entity light="type:directional; color:#ffffff; groundColor:#499763; intensity: 1" position = "-15.048 16.165 -15.023"></a-entity>
+    <a-entity light="type:ambient; color:#e7e5cb; groundColor:#8aae0a; intensity: 2.0" position = "0 10 -7"></a-entity>
+   
+    <!--sounds-->
+    <a-entity id="instruction_dialogue" position="-3.667 2.721 -7.566" circles-sound = "src:#sproot_dialogue; type:dialogue" ></a-entity>
+    <a-entity id="env_music" position = " 0 8 -11.130" circles-sound = "src:#self_music; autoplay:true; volume:0.4; loop:true; type: basic" ></a-entity>
+    <a-entity id="ambiance_music" position = " 0 5 -11.130" circles-sound = "src:#ambiance_effects; autoplay:true; volume:0.2; loop:true; type: ambience" ></a-entity>
+    
+    <!--sounds effects-->
+    <a-entity id="frogHead_sfx" position="0 0 0" circles-sound = "src:#frogHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="chickenHead_sfx" position="0 0 0" circles-sound = "src:#chickenHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="appleHead_sfx" position="0 0 0" circles-sound = "src:#appleHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="cowHead_sfx" position="0 0 0" circles-sound = "src:#cowHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="robotHead_sfx" position="0 0 0" circles-sound = "src:#robotHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="noItem_sfx" position="0 0 0" circles-sound = "src:#noItem_sound; volume:0.4; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+
+    <!--papers-->
+    <a-entity id="papers1"  rotation = " 0 -40 0" scale = " 1 1 1" position = "-3.518 0.744 -11.350" gltf-model="#paper_model0" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity> 
+    <a-entity id="papers2" scale = " 1 1 1" position = "5.990 0.744 -10.861" gltf-model="#paper_model1" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity>
+    <a-entity id="papers3" scale = " 1 1 1" position = "3.984 0.744 -15.158" gltf-model="#paper_model2" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity>
+    <!--env models-->
+    <a-entity id="env_model" gltf-model="#env_gltf" visible='true'   shadow="receive:false; cast:false;"></a-entity>
+    
+    <!--furniture models-->
+    <a-entity id="pedestal_model" gltf-model="#pedestal_gltf" position="0.24753 0.69903 -16.49054" scale="1 1 1" visible="" shadow="cast: false; receive: false" rotation="0 -58.44112214554884 0"></a-entity>
+   
+    <!--npc models-->
+    <a-entity id = "sproot_model" gltf-model = "#sproot_gltf" position = "-4.970 1.187 -7.836" animation-mixer="loop:repeat; clip:Sproot_Idle"></a-entity>
+    <a-box  id = "sproot_collider"  class = "interactive" position = "-4.702 2.460 -7.749" visible = "false"  geometry onclick-sproot = "modelID:#sproot_model; dialogueID:#instruction_dialogue"></a-box>
+
+    <!--Pick Up Objects-->
+    <a-entity id = "item1"  gltf-model ="#frog_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:frog"></a-entity>
+    <a-entity id = "item2" gltf-model ="#chicken_gltf" position="1 0.5 3" rotation="0 45 0"  solaris-pickup-object = "itemType:chicken"></a-entity>
+    <a-entity id = "item3" gltf-model ="#apple_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:apple"></a-entity>
+    <a-entity id = "item4" gltf-model ="#cow_gltf" position="1 0.5 3" rotation="0 45 0"solaris-pickup-object = "itemType:cow"></a-entity>
+    <a-entity id = "item5" gltf-model ="#gear_gltf" position="1 0.5 3" rotation="0 45 0" solaris-pickup-object = "itemType:robot"></a-entity>
+
+    <!--Object Slots-->
+      <!--special slot-->
+    <a-entity id = "slot1" class = "interactive"  position="-3.631 3.054 -15.350" solaris-object-slot> </a-entity>
+      <!--not special slot-->
+    <a-entity id = "slot2" class = "interactive" position="5.0456 1.356 -10.65" rotation="0 43.5476 0" solaris-object-slot = "heldItemId:item1"> </a-entity>
+    <a-entity id = "slot3" class = "interactive"  position="8.1413 0.4 -3.57324"  rotation="0 4.45 0" solaris-object-slot = "heldItemId:item2"> </a-entity>
+    <a-entity id = "slot4" class = "interactive"  position="-11.52954 0.4 -16.42" rotation="0 -44.835 0" solaris-object-slot = "heldItemId:item3"> </a-entity>
+    <a-entity id = "slot5" class = "interactive"  position = "-10.1 0.4 -0.902" roation = "0 -118.498 0" solaris-object-slot = "heldItemId:item4"> </a-entity>
+    <a-entity id = "slot6" class = "interactive"  position = "-1.136 1.356 -16.359" solaris-object-slot = "heldItemId:item5"> </a-entity>
+    <a-entity id = "slot7" class = "interactive"  position = "5.0456 1.356 -16.359" solaris-object-slot > </a-entity>
+    <!--Interactive Objects-->
+    <!--<a-entity class = "interactive" position = "-0.15 2.77 -16.67" circles-button solaris-costume-button> </a-entity> -->
+    <a-entity class="interactive"position="0.23871 2.06741 -16.39339" circles-button="button_color: #ff8e24; pedastal_color: #919191; button_color_hover: #c56d1b" solaris-costume-button rotation="16.887931011481015 -18.32548211946425 0.6233780811023357"></a-entity> 
+    <!--NAVMESH-->
+    <a-entity id="navmesh" gltf-model="#nav_gltf" visible='false' nav-mesh></a-entity>
+      
+    <!--Portals-->
+    <a-entity circles-checkpoint circles-spawnpoint position="0.108 0.05 2.826"></a-entity>
+
+    <a-entity circles-checkpoint position="0.108 0.05 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="0.108 0.746 -8.301"></a-entity>
+    <a-entity circles-checkpoint position="-2.93 0.746 -7.768"></a-entity>
+    <a-entity circles-checkpoint position="-1.5 0.746 -12.25"></a-entity>
+    <a-entity circles-checkpoint position="1.584 0.746 -14.02"></a-entity>
+    <a-entity circles-checkpoint position="3.692 0.746 -12.14"></a-entity>
+    <a-entity circles-checkpoint position="6.471 0.746 -8.434"></a-entity>
+    <a-entity circles-checkpoint position="5.727 0.746 -12.24"></a-entity>
+    <a-entity circles-checkpoint position="4.831 0.050 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="-6.40 0.050 -2.052"></a-entity>
+    <a-entity circles-checkpoint position="-12.40 0.050 -7.851"></a-entity>
+    <a-entity circles-checkpoint position="-12.40 0.050 -13.28"></a-entity>
+    <!------------------------------------------------------------------------------------------------------------------------->
+     
+    <!--Mirror-->
+    <a-entity class="mirror" position="6.553 2.5 -12.17" rotation = "0 -90 0">
+      <a-entity class="mirror_edge" position="0.8 0.0 0.0"    geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity class="mirror_edge" position="-0.8 0.0 0.0"   geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity class="mirror_edge" position="0.0 1.0 0.0"    geometry="primitive:box; width:1.7; height:0.1; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity class="mirror_edge" position="0.0 -1.0 0.0"   geometry="primitive:box; width:1.7; height:0.1; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity class="mirror_back" position="0.0 0.0 -0.01" rotation="0 180 0"  geometry="primitive:plane; width:1.6; height:2.0;" material="color:rgb(100, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity geometry="primitive:plane; width:1.6; height:2.0" circles-platform-mirror="textureSizeDesktop:1024; textureSizeMobile:1024; textureSizeHMD:512;"></a-entity>
+    </a-entity>
+    <!--skymap -->
+    <a-entity id="skySphere" scale=" 3 3 3">
+      <a-sky src = "#sky_map"></a-sky>
+    </a-entity>
+  </a-scene>
+
+  <script>
+  </script>
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>

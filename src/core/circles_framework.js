@@ -73,7 +73,40 @@ const MODEL_HEAD_TYPE = {
   head_2   : '/global/assets/models/gltf/head/Head_Oval.glb',
   head_3   : '/global/assets/models/gltf/head/Head_Square.glb',
   head_4   : '/global/assets/models/gltf/head/Head_Thin.glb',
+
+  //solaris heads
+  head_5   : '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  head_6   :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+  head_7   : '/global/assets/models/gltf/solaris/heads/appleHead.glb',
+  head_8   : '/global/assets/models/gltf/solaris/heads/cowHead.glb',
+  head_9   : '/global/assets/models/gltf/solaris/heads/robotHead.glb',
+
 };
+
+//solaris models
+const SOLARIS_HEADS = {
+  frog     :  '/global/assets/models/gltf/solaris/heads/froghead.glb',
+  chicken  :  '/global/assets/models/gltf/solaris/heads/chickenHead.glb',
+  apple    :  '/global/assets/models/gltf/solaris/heads/appleHead.glb',
+  cow      :  '/global/assets/models/gltf/solaris/heads/cowHead.glb',
+  robot    :  '/global/assets/models/gltf/solaris/heads/robotHead.glb',
+}
+const SOLARIS_FLOWERS = {
+  red       :'/global/assets/models/gltf/solaris/flowers/redFlower.glb',
+  blue      :'/global/assets/models/gltf/solaris/flowers/blueFlower.glb',
+  yellow    : '/global/assets/models/gltf/solaris/flowers/yellowFlower.glb',
+  white     : '/global/assets/models/gltf/solaris/flowers/whiteFlower.glb',
+}
+const SOLARIS_MODELS = {
+  sproot       :'/global/assets/models/gltf/solaris/misc/sproot.glb',
+
+}
+const SOLARIS_FLOWER_ANIM = {
+  seed_stop      :'stillSeed',
+  seed_idle      :'idleSeed',
+  flower_play    : 'playFlower',
+  flower_idle    : 'flowerIdle',
+}
 
 const MODEL_HAIR_TYPE = {
   hair_0   : '/global/assets/models/gltf/hair/Hair_Curly.glb',
@@ -390,5 +423,9 @@ module.exports = {
   enableWarning,
   error,
   enableErrors,
-  getVRPlatform
+  getVRPlatform,
+  SOLARIS_HEADS,
+  SOLARIS_FLOWERS,
+  SOLARIS_FLOWER_ANIM,
+  SOLARIS_MODELS,
 };
