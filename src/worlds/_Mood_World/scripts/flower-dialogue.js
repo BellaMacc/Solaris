@@ -6,6 +6,7 @@ AFRAME.registerComponent('flower-dialogue', {
         dialogueID: {type: 'string', default:'#dialogue'},
     },
     init: function(){
+        console.log("this exists");
         const CONTEXT_AF = this;
         const data = CONTEXT_AF.data;
 
@@ -15,7 +16,6 @@ AFRAME.registerComponent('flower-dialogue', {
         //button is being pressed
         let computerHum =    document.querySelector("#compHum_sfx");
         let moodActive  = document.querySelector("#moodActive_sfx");
-
         computerHum.setAttribute('circles-sound', {state: 'stop'});
         moodActive.setAttribute('circles-sound', {state: 'play'});
            setTimeout(function(){

@@ -22,7 +22,10 @@ AFRAME.registerComponent('solaris-costume-button', {
         const slotContext = mySlot.components['solaris-object-slot'];
         const heldItemID = slotContext.getHeldItemId();
         console.log("Checking held item id: " + heldItemID);
+        const cancelSound   =   document.querySelector("#noItem_sfx");
+
         
+
         // //---- Mat added this as a test for socket connections. this will be removed later
         // let socket = io();
         // let userData = "bingo"; 
@@ -36,10 +39,11 @@ AFRAME.registerComponent('solaris-costume-button', {
             const heldItemType = slotContext.getHeldItemType();
             console.log("Sending request to get head type " +  heldItemType)
             mySlot.emit('changeCostume', {itemType:heldItemType}, true)
-
         }
         else{
             console.log("Item type is invalid");
+            cancelSound.setAttribute("circles-sound", {state:"stop"});
+            cancelSound.setAttribute("circles-sound", {state:"play"});
         }
         
     },

@@ -32,6 +32,7 @@
           <a-asset-item id = "paper_model0" src = "/worlds/_b_SelfWorld/assets/models/papers/papers1.glb"  response-type="arraybuffer"></a-asset-item>
           <a-asset-item id = "paper_model1" src = "/worlds/_b_SelfWorld/assets/models/papers/papers2.glb"  response-type="arraybuffer"></a-asset-item>
           <a-asset-item id = "paper_model2" src = "/worlds/_b_SelfWorld/assets/models/papers/papers3.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id="pedestal_gltf" src="/worlds/_Self_World/assets/models/environment/pedestal.glb" response-type="arraybuffer" ></a-asset-item>
         <!--Images-->
         <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
 
@@ -46,6 +47,7 @@
         <a-asset-item   id = "appleHead_sound" src = "/worlds/_Self_World/assets/music/appleSound.wav" response-type="arraybuffer"></a-asset-ite>
         <a-asset-item   id = "cowHead_sound" src = "/worlds/_Self_World/assets/music/cowSound.wav" response-type="arraybuffer"></a-asset-ite>
         <a-asset-item   id = "robotHead_sound" src = "/worlds/_Self_World/assets/music/robotSound.wav" response-type="arraybuffer"></a-asset-ite>
+        <a-asset-item   id = "noItem_sound" src = "/worlds/_Self_World/assets/music/noItemSound.mp3" response-type="arraybuffer"></a-asset-ite>
 
 
       <!-- Circles' built-in assets [REQUIRED] -->
@@ -73,6 +75,7 @@
     <a-entity id="appleHead_sfx" position="0 0 0" circles-sound = "src:#appleHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
     <a-entity id="cowHead_sfx" position="0 0 0" circles-sound = "src:#cowHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
     <a-entity id="robotHead_sfx" position="0 0 0" circles-sound = "src:#robotHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
+    <a-entity id="noItem_sfx" position="0 0 0" circles-sound = "src:#noItem_sound; volume:0.4; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
 
     <!--papers-->
     <a-entity id="papers1"  rotation = " 0 -40 0" scale = " 1 1 1" position = "-3.518 0.744 -11.350" gltf-model="#paper_model0" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity> 
@@ -82,6 +85,7 @@
     <a-entity id="env_model" gltf-model="#env_gltf" visible='true'   shadow="receive:false; cast:false;"></a-entity>
     
     <!--furniture models-->
+    <a-entity id="pedestal_model" gltf-model="#pedestal_gltf" position="0.24753 0.69903 -16.49054" scale="1 1 1" visible="" shadow="cast: false; receive: false" rotation="0 -58.44112214554884 0"></a-entity>
    
     <!--npc models-->
     <a-entity id = "sproot_model" gltf-model = "#sproot_gltf" position = "-4.970 1.187 -7.836" animation-mixer="loop:repeat; clip:Sproot_Idle"></a-entity>
@@ -105,8 +109,8 @@
     <a-entity id = "slot6" class = "interactive"  position = "-1.136 1.356 -16.359" solaris-object-slot = "heldItemId:item5"> </a-entity>
     <a-entity id = "slot7" class = "interactive"  position = "5.0456 1.356 -16.359" solaris-object-slot > </a-entity>
     <!--Interactive Objects-->
-    <a-entity class = "interactive" position = "-0.15 2.77 -16.67" circles-button solaris-costume-button> </a-entity>
-    
+    <!--<a-entity class = "interactive" position = "-0.15 2.77 -16.67" circles-button solaris-costume-button> </a-entity> -->
+    <a-entity class="interactive"position="0.23871 2.06741 -16.39339" circles-button="button_color: #ff8e24; pedastal_color: #919191; button_color_hover: #c56d1b" solaris-costume-button rotation="16.887931011481015 -18.32548211946425 0.6233780811023357"></a-entity> 
     <!--NAVMESH-->
     <a-entity id="navmesh" gltf-model="#nav_gltf" visible='false' nav-mesh></a-entity>
       
