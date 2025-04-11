@@ -15,15 +15,14 @@
     <a-assets>
       <!--Env-->
       <a-asset-item id="env_gltf" src="/worlds/_Mood_World/assets/models/moodFlowerEnv.glb" response-type="arraybuffer" ></a-asset-item>
-      <a-asset-item id="nav_gltf" src="/worlds/_Mood_World/assets/models/navMeshMood.glb" response-type="arraybuffer" ></a-asset-item>
       <!--Sky-->
       <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
 
       <!--NPCs-->
       <a-asset-item id="pudge_gltf" src= '/global/assets/models/gltf/solaris/misc/pudge.glb' response-type="arraybuffer" ></a-asset-item>
       <a-asset-item id="sproot_gltf" src= '/global/assets/models/gltf/solaris/misc/sproot.glb' response-type="arraybuffer" ></a-asset-item>
+      <a-asset-item id="karat_gltf" src= '/global/assets/models/gltf/solaris/misc/karat.glb' response-type="arraybuffer" ></a-asset-item>
       <a-asset-item id="pongo_gltf" src= '/global/assets/models/gltf/solaris/misc/pongo.glb' response-type="arraybuffer" ></a-asset-item>
-      
       <!--Sounds-->
       <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Mood_World/assets/music/Sproot2.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item  id = "sproot_dialogue2" src = "/worlds/_Mood_World/assets/music/Sproot3.mp3" response-type="arraybuffer"></a-asset-item>
@@ -34,7 +33,9 @@
       <a-asset-item  id = "compFx" src = "/worlds/_Mood_World/assets/env_sfx/computerDefault.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item  id = "moodActiveFx" src = "/worlds/_Mood_World/assets/env_sfx/moodDetector_Activated.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item  id = "towerFx" src = "/worlds/_Mood_World/assets/env_sfx/towerSounds.mp3" response-type="arraybuffer"></a-asset-item>
-
+      
+      <!-- MUSIC -->
+      <a-asset-item  id = "mood_music" src = "/worlds/_Mood_World/assets/music/moodWorld.mp3" response-type="arraybuffer"></a-asset-item>
       
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
@@ -81,32 +82,22 @@
     <a-entity id="moodActive_sfx" position="-31.066 -0.292 3.5" circles-sound = "src:#moodActiveFx; volume:0.5; autoplay:false; type: foley; loop:false"></a-entity>
 
      <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; volume:1.5; type:dialogue" ></a-entity>
-
-    <!--pudge dialogue-->
-
-    <a-entity id="pongo_model" gltf-model="#pongo_gltf" position="-13.149 0.685 -14.095" rotation = "0 -46.330 0"   rotation="0 -46.33 0" scale="0.2 0.2 0.2"></a-entity>
-    <!-- flower dates -->
-    <a-entity id="date1" position="-12.379 0.850 -4.961" rotation="0 0 0" text="value:2025-04-8; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
-    <a-entity id="date2" position="-8.078 1 -7.800" rotation="0 0 0" text="value:2025-04-7; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
-    <a-entity id="date3" position="2.527 1.103 -11.052" rotation="0 0 0" text="value:2025-04-9; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
-    <a-entity id="date4" position="-11.219 1 5.222" rotation="0 180 0" text="value:2025-04-9; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
-    <a-entity id="date5" position="-25.560 0.330 -4.037" rotation="0 0 0" text="value:2025-04-8; color:white; font:roboto; align:center; anchor:center; baseline:top; width:1.3; wrapCount:12;" circles-lookat></a-entity>
+    <!--other npcs-->
+    <a-entity id="pongo_model" gltf-model="#pongo_gltf" position="-11.50273 0 -12.43619"  rotation="0 -90 0" scale = "0.2 0.2 0.2"></a-entity>
+    <a-entity id="karat_model" gltf-model="#karat_gltf" position="-10.67968 0 5.56223" rotation="0 180 0" scale="0.5 0.5 0.5"></a-entity>
     <!--portal-->
-    <a-entity  id = "hub_portal" roation = " 0 -90 0" position="5 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
+    <a-entity  id = "hub_portal" position="7.149 1.325 -1.466" rotation = "0 180 0" scale = "2 2 2" circles-portal="img_src:/worlds/_b_LandingHub/assets/images/hub_world.jpg; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
     <!------------------------------------------------------------------------------------------------------------------------->
-     <!--NAVMESH-->
-    <a-entity id="navmesh" gltf-model="#nav_gltf" visible='false' nav-mesh></a-entity>
+     
     <!--Mirror-->
-    <a-entity class="mirror" position="6.553 1.551 -13.17" rotation = "0 90 0">
+    <a-entity class="mirror" position="6.553 1.551 -12.17" rotation = "0 90 0">
       <a-entity class="mirror_edge" position="0.8 0.0 0.0"    geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
-      <a-entity class="mirror_edge" position="-0.8 0.0 0.0"   geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50npm, 50); roughness:0.5; metalness:0.01;"></a-entity>
+      <a-entity class="mirror_edge" position="-0.8 0.0 0.0"   geometry="primitive:box; width:0.1; height:2.0; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
       <a-entity class="mirror_edge" position="0.0 1.0 0.0"    geometry="primitive:box; width:1.7; height:0.1; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
       <a-entity class="mirror_edge" position="0.0 -1.0 0.0"   geometry="primitive:box; width:1.7; height:0.1; depth:0.1;" material="color:rgb(50, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
       <a-entity class="mirror_back" position="0.0 0.0 -0.01" rotation="0 180 0"  geometry="primitive:plane; width:1.6; height:2.0;" material="color:rgb(100, 50, 50); roughness:0.5; metalness:0.01;"></a-entity>
       <a-entity geometry="primitive:plane; width:1.6; height:2.0" circles-platform-mirror="textureSizeDesktop:1024; textureSizeMobile:1024; textureSizeHMD:512;"></a-entity>
     </a-entity>
-    <!-----------------------tele[prt--------------------------->
-    <a-entity circles-checkpoint circles-spawnpoint position="0.108 0.111 2.462"></a-entity>
 
     <a-entity circles-checkpoint position="5.313 0.359 -4.660"></a-entity>
     <a-entity circles-checkpoint position="6.546 0.359 -9.982"></a-entity>
