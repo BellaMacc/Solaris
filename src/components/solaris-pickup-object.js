@@ -6,7 +6,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
     pickupPosition:     { type: "vec3", default:{x:1.0, y:-0.5, z:0.0} },   //where do we want this relative to the camera
     pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
     pickupScale:        { type: "vec3", default:{x:0.6, y:0.6, z:0.6} },   //what scale relative to the camera
-    dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
+    dropPosition:       { type: "vec3", default:{x:100001.0, y:-0.5, z:0.0} },   //where do we want this to end up after it is released
     dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} }, 
     dropScale:          { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },  //where do we want this to orient as after it is released
     enabled:            { type: "boolean", default:true },                      //whethere this works
@@ -117,15 +117,16 @@ AFRAME.registerComponent('solaris-pickup-object', {
       parentOrigParent.object3D.attach(CONTEXT_AF.el.object3D); //using three's "attach" allows us to retain world transforms during pickup/release
       //CONTEXT_AF.origParent.object3D.attach(CONTEXT_AF.el.object3D); //using three's "attach" allows us to retain world transforms during pickup/release
 
-      const parentPosition = parentEl.getAttribute('position');
+      const parentPosition = parentEl.getAttribute('position') ;
       const parentRotation = parentEl.getAttribute('rotation');
+      const newYPostion = parentPosition.y + data.dropPosition.y;
       //console.log("Checking new positions is " + parentPosition.x + "," + parentPosition.y);
 
       const thisPos = {x:CONTEXT_AF.el.object3D.position.x, y:CONTEXT_AF.el.object3D.position.y, z:CONTEXT_AF.el.object3D.position.z};
       const thisRot = {x:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.x), y:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.y), z:THREE.MathUtils.radToDeg(CONTEXT_AF.el.object3D.rotation.z)};
       const thisSca = {x:CONTEXT_AF.el.object3D.scale.x, y:CONTEXT_AF.el.object3D.scale.y, z:CONTEXT_AF.el.object3D.scale.z};
 
-      const dropPos  = (parentPosition.x < 100001.0) ? {x:parentPosition.x, y:parentPosition.y, z:parentPosition.z} : thisPos; console.log("Keeping my position");;
+      const dropPos  = (parentPosition.x < 100001.0) ? {x:parentPosition.x, y:newYPostion, z:parentPosition.z} : thisPos; console.log("Keeping my position");;
       const dropRot  = (parentRotation.x < 100001.0) ? {x:parentRotation.x, y:parentRotation.y, z:parentRotation.z} : thisRot;
       const dropSca  = (data.dropScale.x < 100001.0) ? {x:data.dropScale.x, y:data.dropScale.y, z:data.dropScale.z} : thisSca;
 

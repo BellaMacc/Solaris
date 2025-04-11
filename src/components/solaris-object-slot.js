@@ -18,7 +18,7 @@ AFRAME.registerComponent('solaris-object-slot', {
     CONTEXT_AF.origParent     = null;
     //item related
     CONTEXT_AF.itemID    = "EMPTY";
-
+    
     //add geometry
     CONTEXT_AF.el.setAttribute('geometry', {primitive:'box',width:1.2, height:1.2, depth:1.2});
     CONTEXT_AF.el.setAttribute('material', {color:'#40edb6', opacity:0.1});
@@ -70,6 +70,8 @@ AFRAME.registerComponent('solaris-object-slot', {
 
     if ( (oldData.enabled !== data.enabled) && (data.enabled !== '') ) {
       CONTEXT_AF.el.setAttribute('circles-interactive-object', {enabled:data.enabled});
+      //CONTEXT_AF.el.setAttribute('circles-interactive-object', {type:'outline'});
+
     }
 
     if (oldData.heldItemId != data.heldItemId){
