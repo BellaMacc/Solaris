@@ -23,16 +23,22 @@
         <a-asset-item id="sproot_gltf" src= '/global/assets/models/gltf/solaris/misc/sproot.glb' response-type="arraybuffer" ></a-asset-item>
        
         <!--Objects-->
-
-       
+     
+          <a-asset-item  id = "apple_gltf" src = "/worlds/_Self_World/assets/models/objects/apple.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "chicken_gltf" src = "/worlds/_Self_World/assets/models/objects/chicken.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "frog_gltf" src = "/worlds/_Self_World/assets/models/objects/frog.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "gear_gltf" src = "/worlds/_Self_World/assets/models/objects/gear.glb" response-type="arraybuffer"></a-asset-item>
+          <a-asset-item  id = "cow_gltf" src = "/worlds/_Self_World/assets/models/objects/cow.glb" response-type="arraybuffer"></a-asset-item>
+          
         <!--Images-->
         <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
 
         <!--Sound-->
+          <!--Dialogue-->
         <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Self_World/assets/music/SprootDialogue.mp3" response-type="arraybuffer"></a-asset-item>
+          <!--Music-->
         <a-asset-item  id = "self_music" src = "/worlds/_Self_World/assets/music/Self_Music.mp3" response-type="arraybuffer"></a-asset-item>
-        <a-asset-item  id = "ambiance_effects" src = "/worlds/_Self_World/sassets/music/ambiance.wav" response-type="arraybuffer"></a-asset-item>
-
+          <!--Effects-->
         <a-asset-ite   id = "frogHead_sound" src = "/worlds/_Self_World/assets/music/FrogSound.wav" response-type="arraybuffer"></a-asset-ite>
         <a-asset-ite   id = "chickenHead_sound" src = "/worlds/_Self_World/assets/music/henSound.wav" response-type="arraybuffer"></a-asset-ite>
         <a-asset-ite   id = "appleHead_sound" src = "/worlds/_Self_World/assets/music/appleSound.wav" response-type="arraybuffer"></a-asset-ite>
@@ -76,11 +82,11 @@
     <a-box  id = "sproot_collider"  class = "interactive" position = "-4.702 2.460 -7.749" visible = "false"  geometry onclick-sproot = "modelID:#sproot_model; dialogueID:#instruction_dialogue"></a-box>
 
     <!--Pick Up Objects-->
-    <a-entity id = "item1" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object = "itemType:frog"></a-entity>
-    <a-entity id = "item2" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object = "itemType:chicken"></a-entity>
-    <a-entity id = "item3" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#fc0f03" solaris-pickup-object = "itemType:apple"></a-entity>
-    <a-entity id = "item4" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#ffffff" solaris-pickup-object = "itemType:cow"></a-entity>
-    <a-entity id = "item5" geometry="primitive: box" position="1 0.5 3" rotation="0 45 0" material="color:#b5b5b5" solaris-pickup-object = "itemType:robot"></a-entity>
+    <a-entity id = "item1"  gltf-model ="#frog_gltf" position="1 0.5 3" rotation="0 45 0" material="color:#d36cd8" solaris-pickup-object = "itemType:frog"></a-entity>
+    <a-entity id = "item2" gltf-model ="#chicken_gltf" position="1 0.5 3" rotation="0 45 0" material="color:#40ed5f" solaris-pickup-object = "itemType:chicken"></a-entity>
+    <a-entity id = "item3" gltf-model ="#apple_gltf" position="1 0.5 3" rotation="0 45 0" material="color:#fc0f03" solaris-pickup-object = "itemType:apple"></a-entity>
+    <a-entity id = "item4" ggltf-model ="#cow_gltf" position="1 0.5 3" rotation="0 45 0" material="color:#ffffff" solaris-pickup-object = "itemType:cow"></a-entity>
+    <a-entity id = "item5" gltf-model ="#gear_gltf" position="1 0.5 3" rotation="0 45 0" material="color:#b5b5b5" solaris-pickup-object = "itemType:robot"></a-entity>
 
     <!--Object Slots-->
       <!--special slot-->

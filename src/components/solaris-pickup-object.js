@@ -3,9 +3,9 @@
 AFRAME.registerComponent('solaris-pickup-object', {
   schema: {
     itemType:           {type: "string", default:'NONE', oneOf:['NONE', 'frog', 'chicken', 'apple', 'cow', 'robot']},
-    pickupPosition:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //where do we want this relative to the camera
+    pickupPosition:     { type: "vec3", default:{x:1.0, y:-0.5, z:0.0} },   //where do we want this relative to the camera
     pickupRotation:     { type: "vec3", default:{x:0.0, y:0.0, z:0.0} },   //what orientation relative to teh camera
-    pickupScale:        { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },   //what scale relative to the camera
+    pickupScale:        { type: "vec3", default:{x:0.6, y:0.6, z:0.6} },   //what scale relative to the camera
     dropPosition:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} },   //where do we want this to end up after it is released
     dropRotation:       { type: "vec3", default:{x:100001.0, y:0.0, z:0.0} }, 
     dropScale:          { type: "vec3", default:{x:1.0, y:1.0, z:1.0} },  //where do we want this to orient as after it is released
@@ -98,7 +98,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
     CONTEXT_AF.pickedUp = true;
 
     //let others know
-    CONTEXT_AF.el.emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
+    //CONTEXT_AF.el.emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
     CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.PICKUP_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
   },
   release : function(sendNetworkEvent, passedContext) {
@@ -139,7 +139,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
         CONTEXT_AF.el.setAttribute('scale', {x:dropSca.x, y:dropSca.y, z:dropSca.z});
 
         //send off event for others
-        CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
+        //CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {sendNetworkEvent:sendNetworkEvent}, true);
         CIRCLES.getCirclesManagerElement().emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT, {el:CONTEXT_AF.el}, false);
         
       };
@@ -160,7 +160,7 @@ AFRAME.registerComponent('solaris-pickup-object', {
       CONTEXT_AF.pickedUp = false;
 
       //sending a "pre" event to turn off controls before any animations might be done
-      CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT_PRE, null, true);
+      //CONTEXT_AF.el.emit(CIRCLES.EVENTS.RELEASE_THIS_OBJECT_PRE, null, true);
     }//end of if check
     else{
       console.log("WARNING: from solaris-pick-up-object on " + this.el.getAttribute('id') + " was attempted to be released without having an assigned parent")

@@ -25,6 +25,8 @@
       <!--Sounds-->
       <a-asset-item  id = "sproot_dialogue" src = "/worlds/_Mood_World/assets/music/Sproot2.mp3" response-type="arraybuffer"></a-asset-item>
       <a-asset-item  id = "sproot_dialogue2" src = "/worlds/_Mood_World/assets/music/Sproot3.mp3" response-type="arraybuffer"></a-asset-item>
+
+      
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
     </a-assets>
@@ -55,6 +57,9 @@
      <a-entity id="pudge_model" gltf-model="#pudge_gltf" position="-32.23337 -0.456 1.65485"  rotation="0 -17.39 0"></a-entity>
      <a-entity id="flwr_dialogue"  position="-32.23337 1 1.65485" circles-sound = "src:#sproot_dialogue2; type:dialogue" ></a-entity>
     <a-entity flower-dialogue = "dialogueID:#flwr_dialogue"></a-entity>
+
+    <!--portal-->
+    <a-entity  id = "hub_portal" roation = " 0 -90 0" position="5 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
   </a-scene>
 
   <!-- Circles' end scripts [REQUIRED] -->
