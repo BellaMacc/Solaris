@@ -16,6 +16,10 @@
       <a-asset id ="hub_music" src = "/worlds/_b_LandingHub/assets/sounds/HubMusic.mp3"></a-asset>
       <a-asset id ="narration" src = "/worlds/_b_LandingHub/assets/sounds/hubNarration.mp3"></a-asset>
       
+      <!--images-->
+      <img id="selfImg" src="/node_server/public/global/assets/textures/equirectangular/PurpleBlue.jpg"></img>
+      <img id="moodImg" src="/node_server/public/global/assets/textures/equirectangular/YellowGreen.jpg"></img>
+      <img id="moodImg" src="/src/worlds/_b_LandingHub/assets/images/self_world.jpg"></img>
       <!-- Circles' built-in assets [REQUIRED] -->
       <circles-assets/>
     </a-assets>
@@ -28,9 +32,15 @@
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/>
     <a-entity id="env_music" position = " 0 6 -11.130" circles-sound = "src:#hub_music; autoplay:true; volume:0.17" ></a-entity>
+<<<<<<< Updated upstream
     <a-entity id="narration_sound" position = " 0 6 -5" circles-sound = "src:#narration; autoplay:true; volume:0.4; type: basic-nondiegetic" ></a-entity>
     <a-entity   roation = " 0 -90 0" position="-1 2.6 -12.953" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_Self_World" ></a-entity>
     <a-entity   roation = " 0 -90 0" position="1 2.6 -12.953" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_Mood_World" ></a-entity>
+=======
+    <a-entity id="narration_sound" position = " 0 6 -5" circles-sound = "src:#narration; autoplay:true; volume:0.3; type: basic-nondiegetic" ></a-entity>
+    <a-entity   rotation = " 0 -90 0" position="-2.6 2.6 -12.953" scale = "2 2 2" circles-portal="img_src:/worlds/_b_LandingHub/assets/images/self_world.jpg; title_text:Self; link_url:/w/_Self_World" ></a-entity>
+    <a-entity   rotation = " 0 -90 0" position="2.6 2.6 -12.953" scale = "2 2 2" circles-portal="img_src:/worlds/_b_LandingHub/assets/images/mood_world.jpg; title_text:Mood; link_url:/w/_Mood_World" ></a-entity>
+>>>>>>> Stashed changes
 
     <!-- checkpoints -->
     <a-entity circles-checkpoint circles-spawnpoint position="-0.102 0.132 1.433"></a-entity>
