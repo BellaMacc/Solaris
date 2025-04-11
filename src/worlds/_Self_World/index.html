@@ -29,7 +29,9 @@
           <a-asset-item  id = "frog_gltf" src = "/worlds/_Self_World/assets/models/objects/frog.glb" response-type="arraybuffer"></a-asset-item>
           <a-asset-item  id = "gear_gltf" src = "/worlds/_Self_World/assets/models/objects/gear.glb" response-type="arraybuffer"></a-asset-item>
           <a-asset-item  id = "cow_gltf" src = "/worlds/_Self_World/assets/models/objects/cow.glb" response-type="arraybuffer"></a-asset-item>
-          
+          <a-asset-item id = "paper_model0" src = "/worlds/_b_SelfWorld/assets/models/papers/papers1.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id = "paper_model1" src = "/worlds/_b_SelfWorld/assets/models/papers/papers2.glb"  response-type="arraybuffer"></a-asset-item>
+          <a-asset-item id = "paper_model2" src = "/worlds/_b_SelfWorld/assets/models/papers/papers3.glb"  response-type="arraybuffer"></a-asset-item>
         <!--Images-->
         <img id="sky_map" src = "/worlds/_Self_World/assets/textures/cloudy_sky.jpg"></img>
 
@@ -54,7 +56,7 @@
     <!-- Circles' built-in manager and avatar [REQUIRED] -->
     <circles-manager-avatar/>
     <!--portal-->
-    <a-entity  id = "hub_portal" roation = " 0 -90 0" position="0 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:#link_1_360; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
+    <a-entity  id = "hub_portal" rotation = " 0 90 0" position="0 0.5 6.-2" scale = "2 2 2" circles-portal="img_src:/worlds/_b_LandingHub/assets/images/hub_world.jpg; title_text:Self; link_url:/w/_b_LandingHub" ></a-entity>
     <!--light-->
     <!--<a-entity light="type:point; color:#e1c2a8; groundColor:#499763; intensity: 22" position = "3.994 6.292 -5.825"></a-entity>--> 
     <a-entity light="type:directional; color:#ffffff; groundColor:#499763; intensity: 1" position = "-15.048 16.165 -15.023"></a-entity>
@@ -72,6 +74,10 @@
     <a-entity id="cowHead_sfx" position="0 0 0" circles-sound = "src:#cowHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
     <a-entity id="robotHead_sfx" position="0 0 0" circles-sound = "src:#robotHead_sound; autoplay:false; type: basic-nondiegetic; loop:false"></a-entity>
 
+    <!--papers-->
+    <a-entity id="papers1"  rotation = " 0 -40 0" scale = " 1 1 1" position = "-3.518 0.744 -11.350" gltf-model="#paper_model0" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity> 
+    <a-entity id="papers2" scale = " 1 1 1" position = "5.990 0.744 -10.861" gltf-model="#paper_model1" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity>
+    <a-entity id="papers3" scale = " 1 1 1" position = "3.984 0.744 -15.158" gltf-model="#paper_model2" visible='true'  circles-pickup-object = "pickupRotation: -80 0 0"></a-entity>
     <!--env models-->
     <a-entity id="env_model" gltf-model="#env_gltf" visible='true'   shadow="receive:false; cast:false;"></a-entity>
     
